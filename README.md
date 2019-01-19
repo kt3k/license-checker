@@ -1,4 +1,4 @@
-# deno_license_checker v0.0.0
+# deno_license_checker v1.0.0
 
 This tool checks the license banners in the files in a git repository. You can configure which files should have which license texts with `.licenserc.json`.
 
