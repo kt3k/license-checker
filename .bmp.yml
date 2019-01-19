@@ -2,4 +2,6 @@
 version: 1.0.0
 commit: Bump to version v%.%.%
 files:
-  README.md: v%.%.%
+  README.md:
+    - deno_license_checker v%.%.%
+    - kt3k/deno_license_checker/v%.%.%/main.ts
