@@ -15,7 +15,7 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-deno https://raw.githubusercontent.com/kt3k/deno_license_checker/v1.1.0/main.ts
+deno --allow-run https://raw.githubusercontent.com/kt3k/deno_license_checker/v1.1.0/main.ts
 ```
 
 This checks the license lines in the files in your repository.
