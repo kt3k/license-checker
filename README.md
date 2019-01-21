@@ -1,4 +1,4 @@
-# deno_license_checker v1.0.0
+# deno_license_checker v1.1.0
 
 This tool checks the license banners in the files in a git repository. You can configure which files should have which license texts with `.licenserc.json`.
 
@@ -15,7 +15,7 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-deno https://raw.githubusercontent.com/kt3k/deno_license_checker/v1.0.0/main.ts
+deno https://raw.githubusercontent.com/kt3k/deno_license_checker/v1.1.0/main.ts
 ```
 
 This checks the license lines in the files in your repository.
