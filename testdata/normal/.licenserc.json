@@ -1,0 +1,4 @@
+{
+  "**/*.js": "Copyright js",
+  "**/*.ts": "Copyright ts"
+}
