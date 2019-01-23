@@ -8,7 +8,7 @@ Create `.licenserc.json` like the following:
 
 ```json
 {
-  "**/*.ts": "// Copyright 2019 Foo. All rights reserved. MIT license."
+  "**/*.ts": "// Copyright 2019 My Name. All rights reserved. MIT license."
 }
 ```
 
@@ -19,6 +19,51 @@ deno --allow-run https://raw.githubusercontent.com/kt3k/deno_license_checker/v1.
 ```
 
 This checks the license lines in the files in your repository.
+
+# `.licenserc.json`
+
+You can use any glob pattern in the keys of `.licenserc.json`
+
+```json
+{
+  "**/*.ts": "Copyright 2019 My Name. All rights reserved. MIT license.",
+
+  "**/*.{js,ts}": "This matches any .js and .ts files",
+
+  "*.go": "This matches .go file in the project root, (not in subdirectories)",
+
+  "src/**/*.ts": "This matches .ts file in `src` dir",
+}
+```
+
+### Skip certain files
+
+You can skip certain files by the `skip` array in config.
+
+```js
+{
+  "**/*.js": "// Copyright 2019 My Name. All rights reserved. MIT license.",
+
+  "skip": [
+    "lib/vendor/jquery.js", // ignore this file
+    "vendor/" // ignore all files under vendor
+  ]
+}
+```
+
+Note: `skip` needs to be an array, not a string.
+
+# Options
+
+```
+Usage: license_checker.ts [options]
+
+Options:
+  -h, --help               Show this help message and exit.
+  -v, --version            Show the version number and exit.
+  -q, --quiet              Don't print messages except errors.
+  -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
+```
 
 # LICENSE
 
