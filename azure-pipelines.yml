@@ -1,19 +1,28 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+variables:
+  DENO_VERSION: v0.2.8
 
-trigger:
-- master
+jobs:
 
-pool:
-  vmImage: 'Ubuntu-16.04'
+- job: Linux
+  pool:
+    vmImage: Ubuntu-16.04
+  steps:
+  - script: curl -L https://deno.land/x/install/install.py | python - $(DENO_VERSION)
+  - script: echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
+  - script: deno --allow-run test.ts
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- job: Mac
+  pool:
+    vmImage: macOS-10.13
+  steps:
+  - script: curl -L https://deno.land/x/install/install.py | python - $(DENO_VERSION)
+  - script: echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
+  - script: deno --allow-run test.ts
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- job: Windows
+  pool:
+    vmImage: vs2017-win2016
+  steps:
+  - powershell: iwr https://deno.land/x/install/install.ps1 -Outfile 'install.ps1'; ./install.ps1 $(DENO_VERSION)
+  - script: echo '##vso[task.prependpath]C:\Users\VssAdministrator\.deno\bin\'
+  - script: 'C:\Users\VssAdministrator\.deno\bin\deno.exe --allow-run main_test.ts'
