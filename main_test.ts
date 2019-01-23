@@ -4,10 +4,12 @@ import { color } from "https://deno.land/x/colors@v0.2.6/mod.ts"
 import { chdir } from "deno"
 import { xrun, decode } from "./util.ts"
 
+const normalize = (output: string) => output.trim().split(/\r?\n/).sort()
+
 test(async function normal() {
   chdir('testdata/normal')
-  const data = (await xrun(['deno', '--allow-run', '../../main.ts'])).trim().split('\n').sort()
-  assertEqual(data, `
+  const data = normalize(await xrun(['deno', '--allow-run', '../../main.ts']))
+  assertEqual(data, normalize(`
 1.js ... ${color.green('ok')}
 1.ts ... ${color.green('ok')}
 2.js ${color.red('missing copyright!')}
@@ -17,15 +19,15 @@ foo/bar/1.js ... ${color.green('ok')}
 foo/bar/2.js ${color.red('missing copyright!')}
 foo/bar/baz/1.js ... ${color.green('ok')}
 foo/bar/baz/2.js ${color.red('missing copyright!')}
-`.trim().split('\n').sort())
+`))
 })
 
 test(async function quiet() {
-  const data = (await xrun(['deno', '--allow-run', '../../main.ts', '-q'])).trim().split('\n').sort()
-  assertEqual(data, `
+  const data = normalize(await xrun(['deno', '--allow-run', '../../main.ts', '-q']))
+  assertEqual(data, normalize(`
 2.js ${color.red('missing copyright!')}
 foo/2.js ${color.red('missing copyright!')}
 foo/bar/2.js ${color.red('missing copyright!')}
 foo/bar/baz/2.js ${color.red('missing copyright!')}
-`.trim().split('\n').sort())
+`))
 })
