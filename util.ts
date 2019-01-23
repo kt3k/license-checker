@@ -1,11 +1,13 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
-import { run, platform } from "deno"
+import { run as denoRun, platform } from "deno"
 
 const decoder = new TextDecoder()
 export const decode = data => decoder.decode(data)
 
-export const xrun = async (args) =>
-  decode(await run({
+export const run = async args =>
+  denoRun({
     args: platform.os === 'win' ? ['cmd.exe', '/c', ...args] : args,
     stdout: 'piped'
-  }).output())
+  })
+
+export const xrun = async (args) => decode(await (await run(args)).output())

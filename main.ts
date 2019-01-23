@@ -37,9 +37,11 @@ const checkFile = async (filename: string, copyright: string, quiet: boolean) =>
     if (!quiet) {
       console.log(filename, '...', color.green('ok'))
     }
-  } else {
-    console.log(filename, color.red('missing copyright!'))
+    return true
   }
+
+  console.log(filename, color.red('missing copyright!'))
+  return false
 }
 
 const main = async (opts) => {
@@ -50,7 +52,7 @@ Usage: license_checker.ts [options]
 Options:
   -h, --help               Show this help message and exit.
   -v, --version            Show the version number and exit.
-  -q, --quiet              Don't print except errors.
+  -q, --quiet              Don't print messages except errors.
   -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
 `)
     exit(0)
@@ -63,17 +65,26 @@ Options:
   const { config, ignore } = await readConfig()
   const filenames = (await xrun(['git', 'ls-files'])).trim().split('\n')
 
+  const tasks = []
+
   for (const filename of filenames) {
     for (const [glob, copyright] of config) {
       if (ignore.some(pattern => filename.includes(pattern))) {
         continue
       }
       if (minimatch(filename, glob)) {
-        // no await here, which speeds up the checks.
-        checkFile(filename, String(copyright), opts.quiet)
+        tasks.push(checkFile(filename, String(copyright), opts.quiet))
       }
     }
   }
+
+  const results = await Promise.all(tasks)
+
+  if (results.includes(false)) {
+    exit(1)
+    return
+  }
+  exit(0)
 }
 
 main(parse(args.slice(1), {
