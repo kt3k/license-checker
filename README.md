@@ -39,22 +39,22 @@ You can use any glob pattern in the keys of `.licenserc.json`
 }
 ```
 
-### Skip certain files
+### Ignore certain files
 
-You can skip certain files by the `skip` array in config.
+You can ignore certain files by the `ignore` array in config.
 
 ```js
 {
   "**/*.js": "// Copyright 2019 My Name. All rights reserved. MIT license.",
 
-  "skip": [
+  "ignore": [
     "lib/vendor/jquery.js", // ignore this file
     "vendor/" // ignore all files under vendor
   ]
 }
 ```
 
-Note: `skip` needs to be an array, not a string.
+Note: `ignore` needs to be an array, not a string.
 
 # Options
 
