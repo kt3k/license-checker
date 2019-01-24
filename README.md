@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/kt3k/deno_license_checker.svg?branch=master)](https://travis-ci.org/kt3k/deno_license_checker)
 [![Build status](https://ci.appveyor.com/api/projects/status/8gf0iwg0d6gwhu2a/branch/master?svg=true)](https://ci.appveyor.com/project/kt3k/deno-license-checker/branch/master)
 
-This tool checks the license banners in the files in a git repository. You can configure which files should have which license texts with `.licenserc.json`.
+This tool checks the license headers in the files in a git repository. You can configure which files should have which license texts with `.licenserc.json`.
 
 # Usage
 
