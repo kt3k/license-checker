@@ -4,10 +4,10 @@ import { run as denoRun, platform } from "deno"
 const decoder = new TextDecoder()
 export const decode = data => decoder.decode(data)
 
-export const run = async args =>
+export const run = args =>
   denoRun({
     args: platform.os === 'win' ? ['cmd.exe', '/c', ...args] : args,
     stdout: 'piped'
   })
 
-export const xrun = async (args) => decode(await (await run(args)).output())
+export const xrun = async (args) => decode(await run(args).output())
