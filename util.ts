@@ -10,4 +10,4 @@ export const run = async args =>
     stdout: 'piped'
   })
 
-export const xrun = async (args) => decode(await (await run(args)).output())
+export const xrun = async (args) => decode(await run(args).output())
