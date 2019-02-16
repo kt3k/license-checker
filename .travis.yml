@@ -2,6 +2,6 @@ language: minimal
 env:
   - PATH=$PATH:$HOME/.deno/bin
 install:
-  - curl -L https://deno.land/x/install/install.py | python - v0.2.8
+  - curl -L https://deno.land/x/install/install.py | python - v0.2.11
 script:
   - deno --allow-run main_test.ts

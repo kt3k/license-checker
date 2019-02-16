@@ -1,5 +1,5 @@
 install:
-  - ps: iwr https://deno.land/x/install@e5a3f6d18b10cfd90186868ee891e1ca5671f9bd/install.ps1 -Outfile 'install.ps1'; ./install.ps1 v0.2.8
+  - ps: iwr https://deno.land/x/install@e5a3f6d18b10cfd90186868ee891e1ca5671f9bd/install.ps1 -Outfile 'install.ps1'; ./install.ps1 v0.2.11
 build: off
 test_script:
   - deno.exe --allow-run main_test.ts
