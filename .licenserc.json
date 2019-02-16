@@ -1,6 +1,4 @@
 {
   "**/*.ts": "Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.",
-  "ignore": [
-    "testdata"
-  ]
+  "ignore": ["testdata"]
 }

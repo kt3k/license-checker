@@ -35,7 +35,7 @@ You can use any glob pattern in the keys of `.licenserc.json`
 
   "*.go": "This matches .go file in the project root, (not in subdirectories)",
 
-  "src/**/*.ts": "This matches .ts file in `src` dir",
+  "src/**/*.ts": "This matches .ts file in `src` dir"
 }
 ```
 
