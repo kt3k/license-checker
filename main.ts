@@ -8,7 +8,7 @@ import { color } from "https://deno.land/x/colors@v0.2.6/mod.ts";
 
 import { xrun, decode } from "./util.ts";
 
-const readConfig = async (config = ".licenserc.json") => {
+async function readConfig(config = ".licenserc.json") {
   let data;
   let configObj;
   try {
@@ -26,18 +26,22 @@ const readConfig = async (config = ".licenserc.json") => {
     exit(1);
   }
 
-  const ignore = configObj.ignore || [];
+  const ignore: string[] = configObj.ignore || [];
   delete configObj.ignore;
 
-  return { ignore, config: Object.entries(configObj) };
+  const entries: Array<[string, string | string[]]> = Object.entries(configObj)
+
+  return { ignore, config: entries };
 };
 
 const checkFile = async (
   filename: string,
-  copyright: string,
+  copyright: string | string[],
   quiet: boolean
 ) => {
-  if (decode(await readFile(filename)).includes(copyright)) {
+  const sourceCode = decode(await readFile(filename))
+  const copyrightLines: string[] = Array.isArray(copyright) ? copyright : [String(copyright)]
+  if (copyrightLines.every(line => sourceCode.includes(line))) {
     if (!quiet) {
       console.log(filename, "...", color.green("ok"));
     }
@@ -61,6 +65,7 @@ Options:
 `);
     exit(0);
   }
+
   if (opts.version) {
     console.log("1.2.0");
     exit(0);
@@ -77,7 +82,7 @@ Options:
         continue;
       }
       if (minimatch(filename, glob)) {
-        tasks.push(checkFile(filename, String(copyright), opts.quiet));
+        tasks.push(checkFile(filename, copyright, opts.quiet));
       }
     }
   }
