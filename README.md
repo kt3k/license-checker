@@ -35,7 +35,22 @@ You can use any glob pattern in the keys of `.licenserc.json`
 
   "*.go": "This matches .go file in the project root, (not in subdirectories)",
 
-  "src/**/*.ts": "This matches .ts file in `src` dir"
+  "src/**/*.ts": "This matches .ts file in `src` dir",
+
+  "**/*.ts": [
+    "You can put multiline headers like this",
+
+    "Copyright Foo, Inc. and other Bar contributors."
+
+    "Permission is hereby granted, free of charge, to any person obtaining a"
+    "copy of this software and associated documentation files (the",
+    "\"Software\"), to deal in the Software without restriction, including",
+    "without limitation the rights to use, copy, modify, merge, publish,",
+    "distribute, sublicense, and/or sell copies of the Software, and to permit",
+    "persons to whom the Software is furnished to do so, subject to the",
+    "following conditions:",
+    "..."
+  ]
 }
 ```
 
@@ -71,3 +86,8 @@ Options:
 # LICENSE
 
 MIT
+
+# History
+
+- 2019-02-24   v1.3.0   Support Multiline copyright header #3
+- 2019-02-16   v1.2.0   Initial release
