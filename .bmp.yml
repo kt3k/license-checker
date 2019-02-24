@@ -6,4 +6,4 @@ files:
   - deno_license_checker v%.%.%
   - license_checker@v%.%.%/main.ts
   main.ts:
-  - console.log('%.%.%')
+  - console.log("%.%.%")

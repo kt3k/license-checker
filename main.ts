@@ -29,18 +29,20 @@ async function readConfig(config = ".licenserc.json") {
   const ignore: string[] = configObj.ignore || [];
   delete configObj.ignore;
 
-  const entries: Array<[string, string | string[]]> = Object.entries(configObj)
+  const entries: Array<[string, string | string[]]> = Object.entries(configObj);
 
   return { ignore, config: entries };
-};
+}
 
 const checkFile = async (
   filename: string,
   copyright: string | string[],
   quiet: boolean
 ) => {
-  const sourceCode = decode(await readFile(filename))
-  const copyrightLines: string[] = Array.isArray(copyright) ? copyright : [String(copyright)]
+  const sourceCode = decode(await readFile(filename));
+  const copyrightLines: string[] = Array.isArray(copyright)
+    ? copyright
+    : [String(copyright)];
   if (copyrightLines.every(line => sourceCode.includes(line))) {
     if (!quiet) {
       console.log(filename, "...", color.green("ok"));

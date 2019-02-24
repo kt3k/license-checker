@@ -8,7 +8,7 @@ export function run(args: string[], cwd?: string) {
   return denoRun({
     args: platform.os === "win" ? ["cmd.exe", "/c", ...args] : args,
     stdout: "piped",
-    cwd,
+    cwd
   });
 }
 

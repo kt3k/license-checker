@@ -13,7 +13,9 @@ const normalize = (output: string) =>
 const perms = ["--allow-read", "--allow-run"];
 
 test(async function normal() {
-  const data = normalize(await xrun(["deno", ...perms, "../../main.ts"], "testdata/normal"));
+  const data = normalize(
+    await xrun(["deno", ...perms, "../../main.ts"], "testdata/normal")
+  );
   assertEqual(
     data,
     normalize(`
@@ -31,7 +33,9 @@ foo/bar/baz/2.js ${color.red("missing copyright!")}
 });
 
 test(async function quiet() {
-  const data = normalize(await xrun(["deno", ...perms, "../../main.ts", "-q"], "testdata/normal"));
+  const data = normalize(
+    await xrun(["deno", ...perms, "../../main.ts", "-q"], "testdata/normal")
+  );
   assertEqual(
     data,
     normalize(`
@@ -44,7 +48,9 @@ foo/bar/baz/2.js ${color.red("missing copyright!")}
 });
 
 test(async function multiline() {
-  const data = normalize(await xrun(["deno", ...perms, "../../main.ts"], "testdata/multiline"));
+  const data = normalize(
+    await xrun(["deno", ...perms, "../../main.ts"], "testdata/multiline")
+  );
   assertEqual(
     data,
     normalize(`
