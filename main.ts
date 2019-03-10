@@ -1,13 +1,19 @@
 #!/usr/bin/env deno --allow-run
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import minimatch
-  from "https://raw.githubusercontent.com/chrisdothtml/deno-minimatch/10f0d68f23f044e71b186112271633eb2c324835/index.js";
-import {args, exit, readFile, writeFile} from "deno";
-import {parse} from "https://deno.land/std@v0.3.1/flags/mod.ts";
-import * as color from "https://deno.land/std@v0.3.1/colors/mod.ts";
+import writeFile = Deno.writeFile;
+
+const { exit, args, readFile } = Deno;
+import { parse } from "https://deno.land/std@v0.3.1/flags/mod.ts";
+import {red, green, blue} from "https://deno.land/std@v0.3.1/colors/mod.ts";
+import { globrex } from "https://deno.land/std@v0.3.1/fs/globrex.ts";
 import {encode} from "https://deno.land/std@v0.3.1/strings/strings.ts"
-import {decode, xrun} from "./util.ts";
+
+import { xrun, decode } from "./util.ts";
+
+function match(filename, glob) {
+  return globrex(glob, { globstar: true }).regex.test(filename);
+}
 
 async function readConfig(config = ".licenserc.json") {
   let data;
@@ -47,18 +53,19 @@ const checkFile = async (
     : [String(copyright)];
   if (copyrightLines.every(line => sourceCode.includes(line))) {
     if (!quiet) {
-      console.log(filename, "...", color.green("ok"));
+      console.log(filename, "...", green("ok"));
     }
     return true;
   }
 
   if (inject) {
-    console.log(`${filename} ${color.blue("missing copyright. injecting ... done")}`);
+    console.log(`${filename} ${blue("missing copyright. injecting ... done")}`);
     await writeFile(filename, encode(copyrightLines.join("\n") + "\n" + sourceCode));
     return true;
   } else {
-    console.log(filename, color.red("missing copyright!"));
+    console.log(filename, red("missing copyright!"));
   }
+
   return false;
 };
 
@@ -78,7 +85,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("1.3.0");
+    console.log("1.4.0");
     exit(0);
   }
 
@@ -92,7 +99,7 @@ Options:
       if (ignore.some(pattern => filename.includes(pattern))) {
         continue;
       }
-      if (minimatch(filename, glob)) {
+      if (match(filename, glob)) {
         tasks.push(checkFile(filename, copyright, opts.quiet, opts.inject));
       }
     }

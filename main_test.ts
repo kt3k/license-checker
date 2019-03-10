@@ -1,12 +1,12 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
-import {runIfMain, test} from "https://deno.land/std@v0.3.1/testing/mod.ts";
-import * as color from "https://deno.land/std@v0.3.1/colors/mod.ts";
+import {runTests, test} from "https://deno.land/std@v0.3.1/testing/mod.ts";
+import {blue, green, red} from "https://deno.land/std@v0.3.1/colors/mod.ts";
 import {xrun} from "./util.ts";
 import {assertEquals} from "https://deno.land/std@v0.3.1/testing/asserts.ts";
+import {StringReader} from "https://deno.land/std@v0.3.1/io/readers.ts";
 import Reader = Deno.Reader;
 import Buffer = Deno.Buffer;
 import copy = Deno.copy;
-import {StringReader} from "https://deno.land/std@v0.3.1/io/readers.ts";
 
 const normalize = (output: string) =>
   output
@@ -23,15 +23,15 @@ test(async function normal() {
   assertEquals(
     data,
     normalize(`
-1.js ... ${color.green("ok")}
-1.ts ... ${color.green("ok")}
-2.js ${color.red("missing copyright!")}
-foo/1.js ... ${color.green("ok")}
-foo/2.js ${color.red("missing copyright!")}
-foo/bar/1.js ... ${color.green("ok")}
-foo/bar/2.js ${color.red("missing copyright!")}
-foo/bar/baz/1.js ... ${color.green("ok")}
-foo/bar/baz/2.js ${color.red("missing copyright!")}
+1.js ... ${green("ok")}
+1.ts ... ${green("ok")}
+2.js ${red("missing copyright!")}
+foo/1.js ... ${green("ok")}
+foo/2.js ${red("missing copyright!")}
+foo/bar/1.js ... ${green("ok")}
+foo/bar/2.js ${red("missing copyright!")}
+foo/bar/baz/1.js ... ${green("ok")}
+foo/bar/baz/2.js ${red("missing copyright!")}
 `)
   );
 });
@@ -43,10 +43,10 @@ test(async function quiet() {
   assertEquals(
     data,
     normalize(`
-2.js ${color.red("missing copyright!")}
-foo/2.js ${color.red("missing copyright!")}
-foo/bar/2.js ${color.red("missing copyright!")}
-foo/bar/baz/2.js ${color.red("missing copyright!")}
+2.js ${red("missing copyright!")}
+foo/2.js ${red("missing copyright!")}
+foo/bar/2.js ${red("missing copyright!")}
+foo/bar/baz/2.js ${red("missing copyright!")}
 `)
   );
 });
@@ -58,9 +58,9 @@ test(async function multiline() {
   assertEquals(
     data,
     normalize(`
-1.ts ... ${color.green("ok")}
-foo/bar/baz/1.ts ... ${color.green("ok")}
-foo/bar/baz/2.ts ${color.red("missing copyright!")}
+1.ts ... ${green("ok")}
+foo/bar/baz/1.ts ... ${green("ok")}
+foo/bar/baz/2.ts ${red("missing copyright!")}
 `)
   );
 });
@@ -108,8 +108,8 @@ test(async function inject() {
     assertEquals(
       data,
       normalize(`
-1.ts ... ${color.green("ok")}
-2.ts ${color.blue("missing copyright. injecting ... done")}
+1.ts ... ${green("ok")}
+2.ts ${blue("missing copyright. injecting ... done")}
 `)
     );
     f1 = await Deno.open("testdata/inject/1.ts");
@@ -131,4 +131,4 @@ test(async function inject() {
   }
 });
 
-runIfMain(import.meta)
+runTests();
