@@ -1,1 +1,10 @@
-{}
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "deno": ["deno.d.ts"]
+    }
+  }
+}
