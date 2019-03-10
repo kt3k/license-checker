@@ -1,12 +1,16 @@
 #!/usr/bin/env deno --allow-run
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import minimatch from "https://raw.githubusercontent.com/chrisdothtml/deno-minimatch/10f0d68f23f044e71b186112271633eb2c324835/index.js";
-import {exit, args, readFile, writeFile} from "deno";
-import { parse } from "https://deno.land/x/flags@v0.2.6/mod.ts";
-import { color } from "https://deno.land/x/colors@v0.2.6/mod.ts";
+import minimatch
+  from "https://raw.githubusercontent.com/chrisdothtml/deno-minimatch/10f0d68f23f044e71b186112271633eb2c324835/index.js";
+import {args, exit, readFile, writeFile} from "deno";
+import {parse} from "https://deno.land/x/flags@v0.2.6/mod.ts";
+import {color} from "https://deno.land/x/colors@v0.2.6/mod.ts";
 import {encode} from "https://deno.land/std@v0.3.1/strings/strings.ts"
-import { xrun, decode } from "./util.ts";
+import {decode, xrun} from "./util.ts";
+import {StringReader} from "https://deno.land/std@v0.3.1/io/readers.ts";
+import stdout = Deno.stdout;
+import copy = Deno.copy;
 
 async function readConfig(config = ".licenserc.json") {
   let data;
@@ -52,9 +56,8 @@ const checkFile = async (
   }
 
   if (inject) {
-    console.log(filename, color.blue("missing copyright. injecting..."));
+    console.log(`${filename} ${color.blue("missing copyright. injecting ... done")}`);
     await writeFile(filename, encode(copyrightLines.join("\n") + "\n" + sourceCode));
-    console.log("done")
     return true;
   } else {
     console.log(filename, color.red("missing copyright!"));
