@@ -78,17 +78,17 @@ const main = async opts => {
 Usage: license_checker.ts [options]
 
 Options:
-  -h, --help               Show this help message and exit.
-  -v, --version            Show the version number and exit.
+  -H, --help               Show this help message and exit.
+  -V, --version            Show the version number and exit.
   -q, --quiet              Don't print messages except errors.
   -i, --inject             Inject license into head if missing.
-  -c, --config <filename>  Specify config filename. Default is '.licenserc.json'. 
+  -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
 `);
     exit(0);
   }
 
   if (opts.version) {
-    console.log("1.4.0");
+    console.log("1.5.0");
     exit(0);
   }
 
@@ -123,8 +123,8 @@ main(
     alias: {
       q: "quiet",
       i: "inject",
-      h: "help",
-      v: "version"
+      H: "help",
+      V: "version"
     }
   })
 );

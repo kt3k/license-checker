@@ -1,4 +1,4 @@
-# deno_license_checker v1.4.0
+# deno_license_checker v1.5.0
 
 [![Build Status](https://travis-ci.org/kt3k/deno_license_checker.svg?branch=master)](https://travis-ci.org/kt3k/deno_license_checker)
 [![Build status](https://ci.appveyor.com/api/projects/status/8gf0iwg0d6gwhu2a/branch/master?svg=true)](https://ci.appveyor.com/project/kt3k/deno-license-checker/branch/master)
@@ -18,7 +18,7 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-deno --allow-read --allow-run https://deno.land/x/license_checker@v1.4.0/main.ts
+deno --allow-read --allow-run https://deno.land/x/license_checker@v1.5.0/main.ts
 ```
 
 This checks the license lines in the files in your repository.
@@ -77,9 +77,10 @@ Note: `ignore` needs to be an array, not a string.
 Usage: license_checker.ts [options]
 
 Options:
-  -h, --help               Show this help message and exit.
-  -v, --version            Show the version number and exit.
+  -H, --help               Show this help message and exit.
+  -V, --version            Show the version number and exit.
   -q, --quiet              Don't print messages except errors.
+  -i, --inject             Inject license into head if missing.
   -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
 ```
 
@@ -89,5 +90,7 @@ MIT
 
 # History
 
+- 2019-03-10 v1.5.0 Add --inject flag
+- 2019-03-10 v1.4.0 Update for deno v0.3.x
 - 2019-02-24 v1.3.0 Support Multiline copyright header #3
 - 2019-02-16 v1.2.0 Initial release
