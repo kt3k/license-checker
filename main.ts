@@ -2,9 +2,9 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import minimatch from "https://raw.githubusercontent.com/chrisdothtml/deno-minimatch/10f0d68f23f044e71b186112271633eb2c324835/index.js";
-import { exit, args, readFile } from "deno";
-import { parse } from "https://deno.land/x/flags@v0.2.6/mod.ts";
-import { color } from "https://deno.land/x/colors@v0.2.6/mod.ts";
+const { exit, args, readFile } = Deno;
+import { parse } from "https://deno.land/std@v0.3.1/flags/mod.ts";
+import { red, green } from "https://deno.land/std@v0.3.1/colors/mod.ts";
 
 import { xrun, decode } from "./util.ts";
 
@@ -45,12 +45,12 @@ const checkFile = async (
     : [String(copyright)];
   if (copyrightLines.every(line => sourceCode.includes(line))) {
     if (!quiet) {
-      console.log(filename, "...", color.green("ok"));
+      console.log(filename, "...", green("ok"));
     }
     return true;
   }
 
-  console.log(filename, color.red("missing copyright!"));
+  console.log(filename, red("missing copyright!"));
   return false;
 };
 
