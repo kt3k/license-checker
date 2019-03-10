@@ -5,9 +5,9 @@ import writeFile = Deno.writeFile;
 
 const { exit, args, readFile } = Deno;
 import { parse } from "https://deno.land/std@v0.3.1/flags/mod.ts";
-import {red, green, blue} from "https://deno.land/std@v0.3.1/colors/mod.ts";
+import { red, green, blue } from "https://deno.land/std@v0.3.1/colors/mod.ts";
 import { globrex } from "https://deno.land/std@v0.3.1/fs/globrex.ts";
-import {encode} from "https://deno.land/std@v0.3.1/strings/strings.ts"
+import { encode } from "https://deno.land/std@v0.3.1/strings/strings.ts";
 
 import { xrun, decode } from "./util.ts";
 
@@ -45,7 +45,7 @@ const checkFile = async (
   filename: string,
   copyright: string | string[],
   quiet: boolean,
-  inject: boolean,
+  inject: boolean
 ) => {
   const sourceCode = decode(await readFile(filename));
   const copyrightLines: string[] = Array.isArray(copyright)
@@ -60,7 +60,10 @@ const checkFile = async (
 
   if (inject) {
     console.log(`${filename} ${blue("missing copyright. injecting ... done")}`);
-    await writeFile(filename, encode(copyrightLines.join("\n") + "\n" + sourceCode));
+    await writeFile(
+      filename,
+      encode(copyrightLines.join("\n") + "\n" + sourceCode)
+    );
     return true;
   } else {
     console.log(filename, red("missing copyright!"));

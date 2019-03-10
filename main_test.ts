@@ -1,11 +1,9 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
-import {runTests, test} from "https://deno.land/std@v0.3.1/testing/mod.ts";
-import {blue, green, red} from "https://deno.land/std@v0.3.1/colors/mod.ts";
-import {xrun} from "./util.ts";
-import {assertEquals} from "https://deno.land/std@v0.3.1/testing/asserts.ts";
-import {StringReader} from "https://deno.land/std@v0.3.1/io/readers.ts";
-import Reader = Deno.Reader;
-import Buffer = Deno.Buffer;
+import { runTests, test } from "https://deno.land/std@v0.3.1/testing/mod.ts";
+import { blue, green, red } from "https://deno.land/std@v0.3.1/colors/mod.ts";
+import { xrun } from "./util.ts";
+import { assertEquals } from "https://deno.land/std@v0.3.1/testing/asserts.ts";
+import { StringReader } from "https://deno.land/std@v0.3.1/io/readers.ts";
 import copy = Deno.copy;
 
 const normalize = (output: string) =>
@@ -65,34 +63,17 @@ foo/bar/baz/2.ts ${red("missing copyright!")}
   );
 });
 
-async function toString(r: Reader) {
-  const buf = new Buffer();
-  await copy(buf, r);
-  return buf.toString();
-}
-
-async function removeIfExist(path: string) {
-  try {
-    await Deno.stat(path);
-    await Deno.remove(path);
-  } catch (e) {
-
-  }
-}
-
 async function readFileText(file: string) {
-  const f = await Deno.open(file)
+  const f = await Deno.open(file);
   const buf = new Deno.Buffer();
   await copy(buf, f);
   f.close();
-  return buf.toString()
+  return buf.toString();
 }
 
 test(async function inject() {
   try {
-    const conf = await Deno.open("testdata/inject/.licenserc.json");
-    const confJson = JSON.parse(await toString(conf));
-    conf.close();
+    const confJson = JSON.parse(await readFileText("testdata/inject/.licenserc.json"));
     const liceses = confJson["**/*.ts"].join("\n");
     const t1 = await readFileText("testdata/inject/1.ts.tmp");
     const t2 = await readFileText("testdata/inject/2.ts.tmp");
@@ -103,7 +84,10 @@ test(async function inject() {
     f1.close();
     f2.close();
     const data = normalize(
-      await xrun(["deno", ...perms, "../../main.ts", "--inject"], "testdata/inject")
+      await xrun(
+        ["deno", ...perms, "../../main.ts", "--inject"],
+        "testdata/inject"
+      )
     );
     assertEquals(
       data,
@@ -112,19 +96,14 @@ test(async function inject() {
 2.ts ${blue("missing copyright. injecting ... done")}
 `)
     );
-    f1 = await Deno.open("testdata/inject/1.ts");
-    f2 = await Deno.open("testdata/inject/2.ts");
+    assertEquals(await readFileText("testdata/inject/1.ts"), t1);
     assertEquals(
-      await toString(f1),
-      t1
-    );
-    assertEquals(
-      await toString(f2),
+      await readFileText("testdata/inject/2.ts"),
       `${liceses}\n${t2}`
     );
   } catch (e) {
-    console.error(e)
-    throw e
+    console.error(e);
+    throw e;
   } finally {
     await Deno.open("testdata/inject/1.ts", "w");
     await Deno.open("testdata/inject/2.ts", "w");
