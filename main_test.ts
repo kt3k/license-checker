@@ -1,6 +1,6 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
-import {assertEqual, test} from "https://deno.land/x/testing@v0.2.6/mod.ts";
-import {color} from "https://deno.land/x/colors@v0.2.6/mod.ts";
+import {runIfMain, test} from "https://deno.land/std@v0.3.1/testing/mod.ts";
+import * as color from "https://deno.land/std@v0.3.1/colors/mod.ts";
 import {xrun} from "./util.ts";
 import {assertEquals} from "https://deno.land/std@v0.3.1/testing/asserts.ts";
 import Reader = Deno.Reader;
@@ -14,13 +14,13 @@ const normalize = (output: string) =>
     .split(/\r?\n/)
     .sort();
 
-const perms = ["--allow-read", "--allow-run"];
+const perms = ["--allow-read", "--allow-run", "--allow-write"];
 
 test(async function normal() {
   const data = normalize(
     await xrun(["deno", ...perms, "../../main.ts"], "testdata/normal")
   );
-  assertEqual(
+  assertEquals(
     data,
     normalize(`
 1.js ... ${color.green("ok")}
@@ -40,7 +40,7 @@ test(async function quiet() {
   const data = normalize(
     await xrun(["deno", ...perms, "../../main.ts", "-q"], "testdata/normal")
   );
-  assertEqual(
+  assertEquals(
     data,
     normalize(`
 2.js ${color.red("missing copyright!")}
@@ -55,7 +55,7 @@ test(async function multiline() {
   const data = normalize(
     await xrun(["deno", ...perms, "../../main.ts"], "testdata/multiline")
   );
-  assertEqual(
+  assertEquals(
     data,
     normalize(`
 1.ts ... ${color.green("ok")}
@@ -103,9 +103,9 @@ test(async function inject() {
     f1.close();
     f2.close();
     const data = normalize(
-      await xrun(["deno", ...perms, "--allow-write", "../../main.ts", "--inject"], "testdata/inject")
+      await xrun(["deno", ...perms, "../../main.ts", "--inject"], "testdata/inject")
     );
-    assertEqual(
+    assertEquals(
       data,
       normalize(`
 1.ts ... ${color.green("ok")}
@@ -118,7 +118,7 @@ test(async function inject() {
       await toString(f1),
       t1
     );
-    assertEqual(
+    assertEquals(
       await toString(f2),
       `${liceses}\n${t2}`
     );
@@ -130,3 +130,5 @@ test(async function inject() {
     await Deno.open("testdata/inject/2.ts", "w");
   }
 });
+
+runIfMain(import.meta)
