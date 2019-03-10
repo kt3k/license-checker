@@ -2,10 +2,10 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import minimatch from "https://raw.githubusercontent.com/chrisdothtml/deno-minimatch/10f0d68f23f044e71b186112271633eb2c324835/index.js";
-import { exit, args, readFile } from "deno";
+import {exit, args, readFile, writeFile} from "deno";
 import { parse } from "https://deno.land/x/flags@v0.2.6/mod.ts";
 import { color } from "https://deno.land/x/colors@v0.2.6/mod.ts";
-
+import {encode} from "https://deno.land/std@v0.3.1/strings/strings.ts"
 import { xrun, decode } from "./util.ts";
 
 async function readConfig(config = ".licenserc.json") {
@@ -37,7 +37,8 @@ async function readConfig(config = ".licenserc.json") {
 const checkFile = async (
   filename: string,
   copyright: string | string[],
-  quiet: boolean
+  quiet: boolean,
+  inject: boolean,
 ) => {
   const sourceCode = decode(await readFile(filename));
   const copyrightLines: string[] = Array.isArray(copyright)
@@ -50,7 +51,14 @@ const checkFile = async (
     return true;
   }
 
-  console.log(filename, color.red("missing copyright!"));
+  if (inject) {
+    console.log(filename, color.blue("missing copyright. injecting..."));
+    await writeFile(filename, encode(copyrightLines.join("\n") + "\n" + sourceCode));
+    console.log("done")
+    return true;
+  } else {
+    console.log(filename, color.red("missing copyright!"));
+  }
   return false;
 };
 
@@ -63,7 +71,8 @@ Options:
   -h, --help               Show this help message and exit.
   -v, --version            Show the version number and exit.
   -q, --quiet              Don't print messages except errors.
-  -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
+  -i, --inject             Inject license into head if missing.
+  -c, --config <filename>  Specify config filename. Default is '.licenserc.json'. 
 `);
     exit(0);
   }
@@ -84,7 +93,7 @@ Options:
         continue;
       }
       if (minimatch(filename, glob)) {
-        tasks.push(checkFile(filename, copyright, opts.quiet));
+        tasks.push(checkFile(filename, copyright, opts.quiet, opts.inject));
       }
     }
   }
@@ -100,9 +109,10 @@ Options:
 
 main(
   parse(args.slice(1), {
-    boolean: ["quiet", "help", "version"],
+    boolean: ["quiet", "help", "version", "inject"],
     alias: {
       q: "quiet",
+      i: "inject",
       h: "help",
       v: "version"
     }

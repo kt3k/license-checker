@@ -3,6 +3,7 @@ import { test, assertEqual } from "https://deno.land/x/testing@v0.2.6/mod.ts";
 import { color } from "https://deno.land/x/colors@v0.2.6/mod.ts";
 import { chdir } from "deno";
 import { xrun, decode } from "./util.ts";
+import makeTempDir = Deno.makeTempDir;
 
 const normalize = (output: string) =>
   output
