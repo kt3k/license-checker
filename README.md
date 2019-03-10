@@ -89,5 +89,5 @@ MIT
 
 # History
 
-- 2019-02-24   v1.3.0   Support Multiline copyright header #3
-- 2019-02-16   v1.2.0   Initial release
+- 2019-02-24 v1.3.0 Support Multiline copyright header #3
+- 2019-02-16 v1.2.0 Initial release

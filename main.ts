@@ -1,12 +1,16 @@
 #!/usr/bin/env deno --allow-run
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import minimatch from "https://raw.githubusercontent.com/chrisdothtml/deno-minimatch/10f0d68f23f044e71b186112271633eb2c324835/index.js";
 const { exit, args, readFile } = Deno;
 import { parse } from "https://deno.land/std@v0.3.1/flags/mod.ts";
 import { red, green } from "https://deno.land/std@v0.3.1/colors/mod.ts";
+import { globrex } from "https://deno.land/std@v0.3.1/fs/globrex.ts";
 
 import { xrun, decode } from "./util.ts";
+
+function match(filename, glob) {
+  return globrex(glob, { globstar: true }).regex.test(filename);
+}
 
 async function readConfig(config = ".licenserc.json") {
   let data;
@@ -83,7 +87,7 @@ Options:
       if (ignore.some(pattern => filename.includes(pattern))) {
         continue;
       }
-      if (minimatch(filename, glob)) {
+      if (match(filename, glob)) {
         tasks.push(checkFile(filename, copyright, opts.quiet));
       }
     }
