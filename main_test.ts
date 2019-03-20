@@ -1,9 +1,14 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
-import { runTests, test } from "https://deno.land/std@v0.3.1/testing/mod.ts"
-import { blue, green, red } from "https://deno.land/std@v0.3.1/colors/mod.ts"
+import {
+  runTests,
+  test,
+  blue,
+  green,
+  red,
+  assertEquals,
+  StringReader
+} from "./dev_deps.ts"
 import { xrun } from "./util.ts"
-import { assertEquals } from "https://deno.land/std@v0.3.1/testing/asserts.ts"
-import { StringReader } from "https://deno.land/std@v0.3.1/io/readers.ts"
 import copy = Deno.copy
 
 const normalize = (output: string) =>

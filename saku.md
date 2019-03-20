@@ -2,7 +2,7 @@
 
 > Run unit tests
 
-    deno --allow-run main_test.ts
+    deno --allow-write --allow-read --allow-run main_test.ts
 
 # fmt
 

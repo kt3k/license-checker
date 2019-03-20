@@ -4,10 +4,7 @@
 import writeFile = Deno.writeFile
 
 const { exit, args, readFile } = Deno
-import { parse } from "https://deno.land/std@v0.3.1/flags/mod.ts"
-import { red, green, blue } from "https://deno.land/std@v0.3.1/colors/mod.ts"
-import { globrex } from "https://deno.land/std@v0.3.1/fs/globrex.ts"
-import { encode } from "https://deno.land/std@v0.3.1/strings/strings.ts"
+import { parse, red, green, blue, globrex, encode } from "./deps.ts"
 
 import { xrun, decode } from "./util.ts"
 
