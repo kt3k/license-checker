@@ -73,7 +73,9 @@ async function readFileText(file: string) {
 
 test(async function inject() {
   try {
-    const confJson = JSON.parse(await readFileText("testdata/inject/.licenserc.json"));
+    const confJson = JSON.parse(
+      await readFileText("testdata/inject/.licenserc.json")
+    );
     const liceses = confJson["**/*.ts"].join("\n");
     const t1 = await readFileText("testdata/inject/1.ts.tmp");
     const t2 = await readFileText("testdata/inject/2.ts.tmp");
