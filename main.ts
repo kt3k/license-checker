@@ -8,11 +8,20 @@ import { parse, red, green, blue, globrex, encode } from "./deps.ts"
 
 import { xrun, decode } from "./util.ts"
 
-function match(filename, glob) {
+function match(filename: string, glob: string): boolean {
   return globrex(glob, { globstar: true }).regex.test(filename)
 }
 
-async function readConfig(config = ".licenserc.json") {
+type LicenseLines = string | string[]
+
+interface Config {
+  ignore: string[]
+  config: Array<[string, LicenseLines]>
+}
+
+async function readConfig(
+  config: string = ".licenserc.json"
+): Promise<Array<Config>> {
   let data
   let configObj
   try {
@@ -30,6 +39,18 @@ async function readConfig(config = ".licenserc.json") {
     exit(1)
   }
 
+  let configObjArray: Array<Config>
+
+  if (Array.isArray(configObj)) {
+    configObjArray = configObj
+  } else {
+    configObjArray = [configObj]
+  }
+
+  return configObjArray.map(configObjToConfig)
+}
+
+function configObjToConfig(configObj): Config {
   const ignore: string[] = configObj.ignore || []
   delete configObj.ignore
 
@@ -89,18 +110,20 @@ Options:
     exit(0)
   }
 
-  const { config, ignore } = await readConfig()
+  const configList = await readConfig()
   const filenames = (await xrun(["git", "ls-files"])).trim().split("\n")
 
   const tasks = []
 
   for (const filename of filenames) {
-    for (const [glob, copyright] of config) {
-      if (ignore.some(pattern => filename.includes(pattern))) {
-        continue
-      }
-      if (match(filename, glob)) {
-        tasks.push(checkFile(filename, copyright, opts.quiet, opts.inject))
+    for (const { ignore, config } of configList) {
+      for (const [glob, copyright] of config) {
+        if (ignore.some(pattern => filename.includes(pattern))) {
+          continue
+        }
+        if (match(filename, glob)) {
+          tasks.push(checkFile(filename, copyright, opts.quiet, opts.inject))
+        }
       }
     }
   }

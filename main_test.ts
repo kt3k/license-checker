@@ -68,6 +68,19 @@ foo/bar/baz/2.ts ${red("missing copyright!")}
   )
 })
 
+test(async function multiconfig() {
+  const data = normalize(
+    await xrun(["deno", ...perms, "../../main.ts"], "testdata/multiconfig")
+  )
+  assertEquals(
+    data,
+    normalize(`
+1.ts ... ${green("ok")}
+2.ts ... ${green("ok")}
+`)
+  )
+})
+
 async function readFileText(file: string) {
   const f = await Deno.open(file)
   const buf = new Deno.Buffer()
