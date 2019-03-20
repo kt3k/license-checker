@@ -1,6 +1,9 @@
 [
   {
-    "1.ts": "Copyright 1.ts"
+    "*.ts": "Copyright 1.ts",
+    "ignore": [
+      "2.ts"
+    ]
   },
   {
     "2.ts": "Copyright 2.ts"

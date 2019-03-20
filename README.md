@@ -71,6 +71,26 @@ You can ignore certain files by the `ignore` array in config.
 
 Note: `ignore` needs to be an array, not a string.
 
+### Multiple config in `.licenserc.json`
+
+You can put multiple config in `.licenserc.json` like the below:
+
+```json
+[
+  {
+    "*.ts": "Copyright main",
+    "ignore": [
+      "vendor.ts"
+    ]
+  },
+  {
+    "vendor.ts": "Copyright some vendor"
+  }
+]
+```
+
+Each object in the main array is treated independently as a single config. This is useful when the some license lines overlaps the ignore pattern of the other config.
+
 # Options
 
 ```
