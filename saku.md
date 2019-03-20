@@ -8,7 +8,7 @@
 
 > Formats the source code
 
-    deno --fmt --allow-run
+    deno https://deno.land/std/prettier/main.ts --allow-write --allow-read --no-semi
 
 # license
 
