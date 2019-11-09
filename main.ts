@@ -106,7 +106,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("1.6.0")
+    console.log("2.0.0")
     exit(0)
   }
 
