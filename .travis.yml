@@ -2,6 +2,6 @@ language: minimal
 env:
   - PATH=$PATH:$HOME/.deno/bin
 install:
-  - curl -L https://deno.land/x/install/install.sh | sh -s v0.16.0
+  - curl -L https://deno.land/x/install/install.sh | sh -s v0.23.0
 script:
-  - deno -A test
+  - deno -A --reload test

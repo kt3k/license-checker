@@ -1,10 +1,12 @@
 // Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
 import {
-  runTests,
-  test,
   blue,
   green,
-  red,
+  red
+} from "./deps.ts"
+import {
+  runTests,
+  test,
   assertEquals,
   StringReader
 } from "./dev_deps.ts"
