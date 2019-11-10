@@ -4,4 +4,4 @@ env:
 install:
   - curl -L https://deno.land/x/install/install.sh | sh -s v0.23.0
 script:
-  - deno -A --reload test
+  - deno main_test.ts -A --reload

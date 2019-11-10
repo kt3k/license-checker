@@ -2,4 +2,4 @@ install:
   - ps: iwr https://deno.land/x/install/install.ps1 -out install.ps1; .\install.ps1 v0.23.0
 build: off
 test_script:
-  - deno.exe -A test
+  - deno.exe main_test.ts -A --reload
