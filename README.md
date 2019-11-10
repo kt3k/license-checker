@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/master/media/deno_license_checker.png" width="100">
+
 # deno_license_checker v2.0.0
 
 [![Build Status](https://travis-ci.org/kt3k/deno_license_checker.svg?branch=master)](https://travis-ci.org/kt3k/deno_license_checker)
