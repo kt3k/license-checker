@@ -110,6 +110,11 @@ Options:
 
 MIT
 
+# See also
+
+- GitHub action version of this tool
+  - https://github.com/kt3k/license_checker
+
 # History
 
 - 2019-03-10 v1.5.0 Add --inject flag
