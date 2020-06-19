@@ -121,3 +121,17 @@ MIT
 - 2019-03-10 v1.4.0 Update for deno v0.3.x
 - 2019-02-24 v1.3.0 Support Multiline copyright header #3
 - 2019-02-16 v1.2.0 Initial release
+
+# Development
+
+See dev commands:
+
+```sh
+./s
+```
+
+Run test:
+
+```sh
+./s test
+```

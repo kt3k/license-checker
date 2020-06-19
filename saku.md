@@ -4,16 +4,16 @@
 
 > Run unit tests
 
-    deno -A test
+    deno test -A
 
 # fmt
 
 > Formats the source code
 
-    deno -A https://deno.land/std/prettier/main.ts --no-semi --ignore testdata
+    deno fmt
 
 # license
 
 > Checks the licenses
 
-    deno -A main.ts
+    deno run -A main.ts
