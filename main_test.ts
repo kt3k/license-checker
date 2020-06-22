@@ -1,4 +1,5 @@
-// Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
+// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+
 import {
   blue,
   green,

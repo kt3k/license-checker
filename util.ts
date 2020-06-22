@@ -1,5 +1,5 @@
-// Copyright 2019 Yoshiya Hinosawa. All rights reserved. MIT license.
-//
+// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+
 const decoder = new TextDecoder();
 export const decode = (data: Uint8Array): string => decoder.decode(data);
 
