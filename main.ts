@@ -4,9 +4,9 @@
 import writeFile = Deno.writeFile;
 
 const { exit, args, readFile } = Deno;
-import { parse, red, green, blue, expandGlob, posix } from "./deps.ts";
+import { parse, red, green, blue, expandGlob } from "./deps.ts";
 
-import { decode, encode } from "./util.ts";
+import { decode, encode, relative } from "./util.ts";
 
 type LicenseLines = string | string[];
 
@@ -121,7 +121,7 @@ Options:
   for (const { ignore, config } of configList) {
     for (const [glob, copyright] of config) {
       for await (const file of expandGlob(glob)) {
-        const relPath = posix.relative(cwd, file.path);
+        const relPath = relative(cwd, file.path);
         if (ignore?.some((pattern) => relPath.includes(pattern))) {
           continue;
         }
