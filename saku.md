@@ -4,7 +4,7 @@
 
 > Run unit tests
 
-    deno test -A
+    deno test --unstable -A
 
 # fmt
 

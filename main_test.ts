@@ -5,8 +5,6 @@ import {
   red,
 } from "./deps.ts";
 import {
-  runTests,
-  test,
   assertEquals,
   StringReader,
 } from "./dev_deps.ts";
@@ -19,11 +17,18 @@ const normalize = (output: string) =>
     .split(/\r?\n/)
     .sort();
 
-const perms = ["--allow-read", "--allow-run", "--allow-write"];
+const baseArgs = [
+  Deno.execPath(),
+  "run",
+  "--unstable",
+  "--allow-read",
+  "--allow-run",
+  "--allow-write",
+];
 
-test(async function normal() {
+Deno.test("normal", async () => {
   const data = normalize(
-    await xrun(["deno", ...perms, "../../main.ts"], "testdata/normal"),
+    await xrun([...baseArgs, "../../main.ts"], "testdata/normal"),
   );
   assertEquals(
     data,
@@ -41,9 +46,9 @@ foo/bar/baz/2.js ${red("missing copyright!")}
   );
 });
 
-test(async function quiet() {
+Deno.test("quiet", async () => {
   const data = normalize(
-    await xrun(["deno", ...perms, "../../main.ts", "-q"], "testdata/normal"),
+    await xrun([...baseArgs, "../../main.ts", "-q"], "testdata/normal"),
   );
   assertEquals(
     data,
@@ -56,9 +61,9 @@ foo/bar/baz/2.js ${red("missing copyright!")}
   );
 });
 
-test(async function multiline() {
+Deno.test("multiline", async () => {
   const data = normalize(
-    await xrun(["deno", ...perms, "../../main.ts"], "testdata/multiline"),
+    await xrun([...baseArgs, "../../main.ts"], "testdata/multiline"),
   );
   assertEquals(
     data,
@@ -70,9 +75,9 @@ foo/bar/baz/2.ts ${red("missing copyright!")}
   );
 });
 
-test(async function multiconfig() {
+Deno.test("multiconfig", async () => {
   const data = normalize(
-    await xrun(["deno", ...perms, "../../main.ts"], "testdata/multiconfig"),
+    await xrun([...baseArgs, "../../main.ts"], "testdata/multiconfig"),
   );
   assertEquals(
     data,
@@ -84,14 +89,10 @@ test(async function multiconfig() {
 });
 
 async function readFileText(file: string) {
-  const f = await Deno.open(file);
-  const buf = new Deno.Buffer();
-  await copy(buf, f);
-  f.close();
-  return buf.toString();
+  return new TextDecoder().decode(await Deno.readFileSync(file));
 }
 
-test(async function inject() {
+Deno.test("inject", async () => {
   try {
     const confJson = JSON.parse(
       await readFileText("testdata/inject/.licenserc.json"),
@@ -99,15 +100,15 @@ test(async function inject() {
     const liceses = confJson["**/*.ts"].join("\n");
     const t1 = await readFileText("testdata/inject/1.ts.tmp");
     const t2 = await readFileText("testdata/inject/2.ts.tmp");
-    let f1 = await Deno.open("testdata/inject/1.ts", "w");
-    let f2 = await Deno.open("testdata/inject/2.ts", "w");
-    await Deno.copy(f1, new StringReader(t1));
-    await Deno.copy(f2, new StringReader(t2));
+    let f1 = await Deno.open("testdata/inject/1.ts", { write: true });
+    let f2 = await Deno.open("testdata/inject/2.ts", { write: true });
+    await Deno.copy(new StringReader(t1), f1);
+    await Deno.copy(new StringReader(t2), f2);
     f1.close();
     f2.close();
     const data = normalize(
       await xrun(
-        ["deno", ...perms, "../../main.ts", "--inject"],
+        [...baseArgs, "../../main.ts", "--inject"],
         "testdata/inject",
       ),
     );
@@ -127,9 +128,9 @@ test(async function inject() {
     console.error(e);
     throw e;
   } finally {
-    await Deno.open("testdata/inject/1.ts", "w");
-    await Deno.open("testdata/inject/2.ts", "w");
+    const f1 = await Deno.open("testdata/inject/1.ts", { write: true });
+    const f2 = await Deno.open("testdata/inject/2.ts", { write: true });
+    f1.close();
+    f2.close();
   }
 });
-
-runTests();

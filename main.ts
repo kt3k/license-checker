@@ -60,7 +60,7 @@ const checkFile = async (
   copyright: string | string[],
   quiet?: boolean,
   inject?: boolean,
-) => {
+): Promise<boolean> => {
   const sourceCode = decode(await readFile(filename));
   const copyrightLines: string[] = Array.isArray(copyright)
     ? copyright
@@ -125,7 +125,7 @@ Options:
         if (ignore?.some((pattern) => relPath.includes(pattern))) {
           continue;
         }
-        tasks.push(checkFile(relPath, copyright, opts.quiet, opts?.inject));
+        tasks.push(checkFile(relPath, copyright, opts.quiet, opts.inject));
       }
     }
   }
@@ -140,13 +140,13 @@ Options:
 };
 
 main(
-  parse(args.slice(1), {
+  parse(args, {
     boolean: ["quiet", "help", "version", "inject"],
     alias: {
       q: "quiet",
       i: "inject",
-      H: "help",
-      V: "version",
+      h: "help",
+      v: "version",
     },
   }) as any,
 );
