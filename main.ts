@@ -4,25 +4,21 @@
 import writeFile = Deno.writeFile;
 
 const { exit, args, readFile } = Deno;
-import { parse, red, green, blue, globrex, encode } from "./deps.ts";
+import { parse, red, green, blue, expandGlob, posix } from "./deps.ts";
 
-import { xrun, decode } from "./util.ts";
-
-function match(filename: string, glob: string): boolean {
-  return globrex(glob, { globstar: true }).regex.test(filename);
-}
+import { decode, encode } from "./util.ts";
 
 type LicenseLines = string | string[];
 
 interface Config {
-  ignore: string[];
+  ignore?: string[];
   config: Array<[string, LicenseLines]>;
 }
 
 async function readConfig(
   config: string = ".licenserc.json",
 ): Promise<Array<Config>> {
-  let data;
+  let data: Uint8Array;
   let configObj;
   try {
     data = await readFile(config);
@@ -32,7 +28,7 @@ async function readConfig(
   }
 
   try {
-    configObj = JSON.parse(decode(data));
+    configObj = JSON.parse(decode(data!));
   } catch (e) {
     console.log(`Error: Failed to parse "${config}" as JSON.`);
     console.log(e);
@@ -50,8 +46,8 @@ async function readConfig(
   return configObjArray.map(configObjToConfig);
 }
 
-function configObjToConfig(configObj): Config {
-  const ignore: string[] = configObj.ignore || [];
+function configObjToConfig(configObj: Config): Config {
+  const ignore = configObj.ignore || [];
   delete configObj.ignore;
 
   const entries: Array<[string, string | string[]]> = Object.entries(configObj);
@@ -62,8 +58,8 @@ function configObjToConfig(configObj): Config {
 const checkFile = async (
   filename: string,
   copyright: string | string[],
-  quiet: boolean,
-  inject: boolean,
+  quiet?: boolean,
+  inject?: boolean,
 ) => {
   const sourceCode = decode(await readFile(filename));
   const copyrightLines: string[] = Array.isArray(copyright)
@@ -90,7 +86,14 @@ const checkFile = async (
   return false;
 };
 
-const main = async (opts) => {
+type Opts = {
+  help?: boolean;
+  version?: boolean;
+  quiet?: boolean;
+  inject?: boolean;
+};
+
+const main = async (opts: Opts) => {
   if (opts.help) {
     console.log(`
 Usage: license_checker.ts [options]
@@ -111,19 +114,18 @@ Options:
   }
 
   const configList = await readConfig();
-  const filenames = (await xrun(["git", "ls-files"])).trim().split("\n");
+  const cwd = Deno.cwd();
 
   const tasks = [];
 
-  for (const filename of filenames) {
-    for (const { ignore, config } of configList) {
-      for (const [glob, copyright] of config) {
-        if (ignore.some((pattern) => filename.includes(pattern))) {
+  for (const { ignore, config } of configList) {
+    for (const [glob, copyright] of config) {
+      for await (const file of expandGlob(glob)) {
+        const relPath = posix.relative(cwd, file.path);
+        if (ignore?.some((pattern) => relPath.includes(pattern))) {
           continue;
         }
-        if (match(filename, glob)) {
-          tasks.push(checkFile(filename, copyright, opts.quiet, opts.inject));
-        }
+        tasks.push(checkFile(relPath, copyright, opts.quiet, opts?.inject));
       }
     }
   }
@@ -146,5 +148,5 @@ main(
       H: "help",
       V: "version",
     },
-  }),
+  }) as any,
 );
