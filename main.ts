@@ -148,5 +148,6 @@ main(
       h: "help",
       v: "version",
     },
+    // deno-lint-ignore no-explicit-any
   }) as any,
 );
