@@ -2,4 +2,4 @@ install:
   - ps: iwr https://deno.land/x/install/install.ps1 -out install.ps1; .\install.ps1 v1.1.0
 build: off
 test_script:
-  - deno.exe test --unstable --A
+  - deno.exe test --unstable -A
