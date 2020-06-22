@@ -15,7 +15,7 @@ import copy = Deno.copy;
 const normalize = (output: string) =>
   output
     .trim()
-    .replace(/\\/, '/')
+    .replace(/\\/g, '/')
     .split(/\r?\n/)
     .sort();
 
