@@ -89,10 +89,6 @@ Deno.test("multiconfig", async () => {
   );
 });
 
-async function readFileText(file: string) {
-  return new TextDecoder().decode(await Deno.readFileSync(file));
-}
-
 Deno.test("inject", async () => {
   try {
     const confJson = JSON.parse(
@@ -101,8 +97,8 @@ Deno.test("inject", async () => {
     const liceses = confJson["**/*.ts"].join("\n");
     const t1 = await readFileText("testdata/inject/1.ts.tmp");
     const t2 = await readFileText("testdata/inject/2.ts.tmp");
-    let f1 = await Deno.open("testdata/inject/1.ts", { write: true });
-    let f2 = await Deno.open("testdata/inject/2.ts", { write: true });
+    let f1 = await Deno.open("testdata/inject/1.ts", { write: true, truncate: true });
+    let f2 = await Deno.open("testdata/inject/2.ts", { write: true, truncate: true });
     await Deno.copy(new StringReader(t1), f1);
     await Deno.copy(new StringReader(t2), f2);
     f1.close();
@@ -135,3 +131,7 @@ Deno.test("inject", async () => {
     f2.close();
   }
 });
+
+async function readFileText(file: string) {
+  return new TextDecoder().decode(await Deno.readFileSync(file));
+}
