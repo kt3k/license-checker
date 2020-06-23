@@ -99,8 +99,8 @@ Each object in the main array is treated independently as a single config. This 
 Usage: license_checker.ts [options]
 
 Options:
-  -H, --help               Show this help message and exit.
-  -V, --version            Show the version number and exit.
+  -h, --help               Show this help message and exit.
+  -v, --version            Show the version number and exit.
   -q, --quiet              Don't print messages except errors.
   -i, --inject             Inject license into head if missing.
   -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
@@ -117,6 +117,7 @@ MIT
 
 # History
 
+- 2020-06-23 v2.0.1 Update for deno v1.1.0.
 - 2019-03-10 v1.5.0 Add --inject flag
 - 2019-03-10 v1.4.0 Update for deno v0.3.x
 - 2019-02-24 v1.3.0 Support Multiline copyright header #3
