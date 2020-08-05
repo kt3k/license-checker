@@ -109,7 +109,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("2.0.0");
+    console.log("3.0.0");
     exit(0);
   }
 
