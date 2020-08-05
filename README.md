@@ -20,7 +20,7 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-deno --allow-read --allow-run https://deno.land/x/license_checker@v3.0.3/main.ts
+deno run --unstable --allow-read https://deno.land/x/license_checker@v3.0.3/main.ts
 ```
 
 This checks the license lines in the files in your repository.
@@ -117,6 +117,7 @@ MIT
 
 # History
 
+- 2020-08-05 v3.0.3 Update for the new registry.
 - 2020-06-23 v2.0.1 Update for deno v1.1.0.
 - 2019-03-10 v1.5.0 Add --inject flag
 - 2019-03-10 v1.4.0 Update for deno v0.3.x
