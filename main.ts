@@ -3,7 +3,7 @@
 import writeFile = Deno.writeFile;
 
 const { exit, args, readFile } = Deno;
-import { blue, expandGlob, green, parse, red } from "./deps.ts";
+import { blue, contains, expandGlob, green, parse, red } from "./deps.ts";
 
 import { decode, delay, encode, relative } from "./util.ts";
 
@@ -56,15 +56,17 @@ function configObjToConfig(configObj: Config): Config {
 
 const checkFile = async (
   filename: string,
-  copyright: string | string[],
+  copyrightLines: Uint8Array[],
   quiet?: boolean,
   inject?: boolean,
 ): Promise<boolean> => {
-  const sourceCode = decode(await readFile(filename));
-  const copyrightLines: string[] = Array.isArray(copyright)
-    ? copyright
-    : [String(copyright)];
-  if (copyrightLines.every((line) => sourceCode.includes(line))) {
+  const file = await Deno.open(filename, { read: true });
+  // We assume copyright header appears in first 8KB of each file.
+  const sourceCode = new Uint8Array(8192);
+  await Deno.read(file.rid, sourceCode);
+  Deno.close(file.rid);
+
+  if (copyrightLines.every((line) => contains(sourceCode, line))) {
     if (!quiet) {
       console.log(filename, "...", green("ok"));
     }
@@ -72,10 +74,11 @@ const checkFile = async (
   }
 
   if (inject) {
+    const sourceCode = await readFile(filename);
     console.log(`${filename} ${blue("missing copyright. injecting ... done")}`);
     await writeFile(
       filename,
-      encode(copyrightLines.join("\n") + "\n" + sourceCode),
+      encode(copyrightLines.map(decode).join("\n") + "\n" + decode(sourceCode)),
     );
     return true;
   } else {
@@ -119,12 +122,15 @@ Options:
 
   for (const { ignore, config } of configList) {
     for (const [glob, copyright] of config) {
+      const copyrightLines = Array.isArray(copyright)
+        ? copyright.map(encode)
+        : [encode(copyright)]
       for await (const file of expandGlob(glob)) {
         const relPath = relative(cwd, file.path);
         if (ignore?.some((pattern) => relPath.includes(pattern))) {
           continue;
         }
-        tasks.push(checkFile(relPath, copyright, opts.quiet, opts.inject));
+        tasks.push(checkFile(relPath, copyrightLines, opts.quiet, opts.inject));
         await delay(1);
       }
     }
