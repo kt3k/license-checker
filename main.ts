@@ -1,4 +1,3 @@
-#!/usr/bin/env deno --allow-run
 // Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import writeFile = Deno.writeFile;
@@ -6,7 +5,7 @@ import writeFile = Deno.writeFile;
 const { exit, args, readFile } = Deno;
 import { blue, expandGlob, green, parse, red } from "./deps.ts";
 
-import { decode, encode, relative } from "./util.ts";
+import { decode, delay, encode, relative } from "./util.ts";
 
 type LicenseLines = string | string[];
 
@@ -126,6 +125,7 @@ Options:
           continue;
         }
         tasks.push(checkFile(relPath, copyright, opts.quiet, opts.inject));
+        await delay(1);
       }
     }
   }

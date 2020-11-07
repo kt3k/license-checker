@@ -30,3 +30,9 @@ export function relative(base: string, path: string): string {
     return posix.relative(base, path);
   }
 }
+
+export function delay(n: number) {
+  return new Promise((resolve, _) => {
+    setTimeout(() => resolve(), n);
+  });
+}
