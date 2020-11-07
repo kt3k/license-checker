@@ -108,7 +108,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("3.0.3");
+    console.log("3.0.4");
     exit(0);
   }
 
