@@ -4,7 +4,7 @@
 
 > Run unit tests
 
-    deno test --unstable --allow-read --allow-write --allow-run
+    deno test --coverage --unstable --allow-read --allow-write --allow-run
 
 # fmt
 
