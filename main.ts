@@ -4,7 +4,7 @@
 import writeFile = Deno.writeFile;
 
 const { exit, args, readFile } = Deno;
-import { parse, red, green, blue, expandGlob } from "./deps.ts";
+import { blue, expandGlob, green, parse, red } from "./deps.ts";
 
 import { decode, encode, relative } from "./util.ts";
 

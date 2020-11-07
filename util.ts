@@ -25,8 +25,8 @@ export async function xrun(args: string[], cwd?: string): Promise<string> {
 
 export function relative(base: string, path: string): string {
   if (Deno.build.os === "windows") {
-    return win32.relative(base, path)
+    return win32.relative(base, path);
   } else {
-    return posix.relative(base, path)
+    return posix.relative(base, path);
   }
 }
