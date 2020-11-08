@@ -106,6 +106,35 @@ Options:
   -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
 ```
 
+# API
+
+```
+import { checkLicense} from "https://deno.land/x/license_checker@03.0.4/lib.ts";
+```
+
+## `checkLicense(configs: Config[], options: Options): Promise<boolean>`
+
+Where:
+
+```
+type Config = {
+  ignore?: string[]
+  config: Array<[string, (string | string[])]>
+}
+
+// The tuple `[string, (string | string[])]` means
+// The pair of (globPattern, license-headers)
+// This checks whether license-headers exists files of globPattern.
+
+type Options = {
+  inject: boolean
+  quiet: boolean
+  cwd: string
+}
+```
+
+This checks the license headers according to the given config and options.
+
 # LICENSE
 
 MIT
