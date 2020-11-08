@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/master/media/deno_license_checker.png" width="100">
 
-# deno_license_checker v3.0.4
+# deno_license_checker v3.1.0
 
 [![Build Status](https://travis-ci.org/kt3k/deno_license_checker.svg?branch=master)](https://travis-ci.org/kt3k/deno_license_checker)
 [![Build status](https://ci.appveyor.com/api/projects/status/8gf0iwg0d6gwhu2a/branch/master?svg=true)](https://ci.appveyor.com/project/kt3k/deno-license-checker/branch/master)
@@ -20,7 +20,7 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-deno run --unstable --allow-read https://deno.land/x/license_checker@v3.0.4/main.ts
+deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.0/main.ts
 ```
 
 This checks the license lines in the files in your repository.
@@ -109,7 +109,7 @@ Options:
 # API
 
 ```
-import { checkLicense} from "https://deno.land/x/license_checker@03.0.4/lib.ts";
+import { checkLicense} from "https://deno.land/x/license_checker@v3.1.0/lib.ts";
 ```
 
 ## `checkLicense(configs: Config[], options: Options): Promise<boolean>`
