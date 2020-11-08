@@ -108,7 +108,7 @@ Options:
 
 # API
 
-```
+```ts
 import { checkLicense} from "https://deno.land/x/license_checker@v3.1.0/lib.ts";
 ```
 
@@ -116,7 +116,7 @@ import { checkLicense} from "https://deno.land/x/license_checker@v3.1.0/lib.ts";
 
 Where:
 
-```
+```ts
 type Config = {
   ignore?: string[]
   config: Array<[string, (string | string[])]>
