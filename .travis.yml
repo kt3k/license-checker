@@ -1,7 +1,0 @@
-language: minimal
-env:
-  - PATH=$PATH:$HOME/.deno/bin
-install:
-  - curl -L https://deno.land/x/install/install.sh | sh -s v1.5.1
-script:
-  - ./s test
