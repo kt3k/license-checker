@@ -31,7 +31,7 @@ export function relative(base: string, path: string): string {
   }
 }
 
-export function delay(n: number) {
+export function delay(n: number): Promise<void> {
   return new Promise((resolve, _) => {
     setTimeout(() => resolve(), n);
   });
