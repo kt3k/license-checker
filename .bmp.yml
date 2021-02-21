@@ -2,7 +2,7 @@
 version: 3.1.1
 commit: Bump to version v%.%.%
 files:
-  README.md:
+  README.mkd:
   - deno_license_checker v%.%.%
   - license_checker@v%.%.%/main.ts
   - license_checker@v%.%.%/lib.ts
