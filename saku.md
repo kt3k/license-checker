@@ -17,7 +17,7 @@
 
 > Send lcov.info to codecov
 
-    bash <(curl -s https://codecov.io/bash)
+    curl -s https://codecov.io/bash | bash
 
 # fmt
 
