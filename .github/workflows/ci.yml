@@ -7,6 +7,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: denolib/setup-deno@v2
         with:
-          deno-version: canary
+          deno-version: nightly
       - run: ./s cov
       - run: ./s codecov
