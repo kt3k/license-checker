@@ -2,11 +2,17 @@ name: ci
 on: [push, pull_request]
 jobs:
   build:
+    strategy:
+      matrix:
+        deno:
+          - v1.8.0
+          - v1.8
+          - canary
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: denolib/setup-deno@v2
+      - uses: denoland/setup-deno@main
         with:
-          deno-version: nightly
+          deno-version: ${{ matrix.deno }}
       - run: ./s cov
       - run: ./s codecov
