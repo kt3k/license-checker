@@ -1,12 +1,15 @@
 name: ci
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   build:
     strategy:
       matrix:
         deno:
-          - v1.8.0
-          - v1.8
+          - v1.x
           - canary
     runs-on: ubuntu-latest
     steps:
