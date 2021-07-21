@@ -20,33 +20,52 @@ const checkFile = async (
   quiet: boolean,
   inject: boolean,
 ): Promise<boolean> => {
-  const file = await Deno.open(filename, { read: true });
-  // We assume copyright header appears in first 8KB of each file.
-  const sourceCode = new Uint8Array(8192);
-  await Deno.read(file.rid, sourceCode);
-  Deno.close(file.rid);
 
-  if (copyrightLines.every((line) => contains(sourceCode, line))) {
-    if (!quiet) {
-      console.log(filename, "...", green("ok"));
+  try {  
+
+    const file = await Deno.open(filename, { read: true });
+    // We assume copyright header appears in first 8KB of each file.
+    const sourceCode = new Uint8Array(8192);
+    await Deno.read(file.rid, sourceCode);
+    Deno.close(file.rid);
+
+    if (copyrightLines.every((line) => contains(sourceCode, line))) {
+      if (!quiet) {
+        console.log(filename, "...", green("ok"));
+      }
+      return true;
     }
-    return true;
-  }
 
-  if (inject) {
-    const sourceCode = await readFile(filename);
-    console.log(`${filename} ${blue("missing copyright. injecting ... done")}`);
-    await writeFile(
-      filename,
-      encode(copyrightLines.map(decode).join("\n") + "\n" + decode(sourceCode)),
-    );
-    return true;
-  } else {
-    console.log(filename, red("missing copyright!"));
-  }
+    if (inject) {
+      const sourceCode = await readFile(filename);
+      console.log(`${filename} ${blue("missing copyright. injecting ... done")}`);
+      await writeFile(
+        filename,
+        encode(copyrightLines.map(decode).join("\n") + "\n" + decode(sourceCode)),
+      );
+      return true;
+    } else {
+      console.log(filename, red("missing copyright!"));
+    }
 
+  } catch (error) {
+    console.error(error);
+  }
+  
   return false;
 };
+
+/*
+ * This function was not working
+function configObjToConfig(filename: string): Config {
+  const ignore = configObj.ignore || [];
+  delete configObj.ignore;
+
+  const entries: Array<[string, string | string[]]> = Object.entries(configObj);
+
+  return { ignore, config: entries };
+}
+*/
 
 type CheckOptions = {
   cwd?: string;
