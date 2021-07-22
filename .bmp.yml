@@ -1,10 +1,8 @@
----
-version: 3.1.3
+version: 3.1.4
 commit: Bump to version v%.%.%
 files:
   README.mkd:
-  - deno_license_checker v%.%.%
-  - license_checker@v%.%.%/main.ts
-  - license_checker@v%.%.%/lib.ts
-  main.ts:
-  - console.log("%.%.%")
+    - deno_license_checker v%.%.%
+    - license_checker@v%.%.%/main.ts
+    - license_checker@v%.%.%/lib.ts
+  main.ts: console.log("%.%.%")
