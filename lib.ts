@@ -2,8 +2,8 @@
 
 import writeFile = Deno.writeFile;
 
-const { exit, args, readFile } = Deno;
-import { blue, contains, expandGlob, green, parse, red } from "./deps.ts";
+const { readFile } = Deno;
+import { blue, contains, expandGlob, green, red } from "./deps.ts";
 
 import { decode, delay, encode, relative } from "./util.ts";
 

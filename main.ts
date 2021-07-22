@@ -1,22 +1,20 @@
 // Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import writeFile = Deno.writeFile;
-
 const { exit, args, readFile } = Deno;
-import { blue, contains, expandGlob, green, parse, red } from "./deps.ts";
+import { parse } from "./deps.ts";
 
-import { decode, delay, encode, relative } from "./util.ts";
+import { decode } from "./util.ts";
 import type { Config } from "./lib.ts";
 import { checkLicense } from "./lib.ts";
 
 async function readConfig(
-  config: string = ".licenserc.json",
+  config = ".licenserc.json",
 ): Promise<Array<Config>> {
   let data: Uint8Array;
   let configObj;
   try {
     data = await readFile(config);
-  } catch (e) {
+  } catch (_e) {
     console.log(`Error: config file "${config}" not found.`);
     exit(1);
   }

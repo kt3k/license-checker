@@ -29,7 +29,7 @@
 
 > Formats the source code
 
-    deno lint --unstable
+    deno lint
 
 # license
 

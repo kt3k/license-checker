@@ -1,9 +1,8 @@
 // Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { blue, green, red } from "./deps.ts";
+import { blue, green, red, copy } from "./deps.ts";
 import { assertEquals, StringReader } from "./dev_deps.ts";
 import { xrun } from "./util.ts";
-import copy = Deno.copy;
 
 const normalize = (output: string) =>
   output
@@ -91,16 +90,16 @@ Deno.test("inject", async () => {
     const liceses = confJson["**/*.ts"].join("\n");
     const t1 = await readFileText("testdata/inject/1.ts.tmp");
     const t2 = await readFileText("testdata/inject/2.ts.tmp");
-    let f1 = await Deno.open(
+    const f1 = await Deno.open(
       "testdata/inject/1.ts",
       { write: true, truncate: true },
     );
-    let f2 = await Deno.open(
+    const f2 = await Deno.open(
       "testdata/inject/2.ts",
       { write: true, truncate: true },
     );
-    await Deno.copy(new StringReader(t1), f1);
-    await Deno.copy(new StringReader(t2), f2);
+    await copy(new StringReader(t1), f1);
+    await copy(new StringReader(t2), f2);
     f1.close();
     f2.close();
     const data = normalize(
