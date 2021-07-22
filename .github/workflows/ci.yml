@@ -18,6 +18,6 @@ jobs:
         with:
           deno-version: v1.x
       - run: |
-        ./s cov
-        ./s codecov
+          ./s cov
+          ./s codecov
         shell: bash
