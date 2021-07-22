@@ -20,6 +20,13 @@ const checkFile = async (
   quiet: boolean,
   inject: boolean,
 ): Promise<boolean> => {
+  const stat = await Deno.lstat(filename);
+  if (stat.isDirectory) {
+    if (!quiet) {
+      console.log(filename, "is a directory. Skipping this item.");
+    }
+    return true;
+  }
   const file = await Deno.open(filename, { read: true });
   // We assume copyright header appears in first 8KB of each file.
   const sourceCode = new Uint8Array(8192);

@@ -1,6 +1,6 @@
 // Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { blue, green, red, copy } from "./deps.ts";
+import { blue, copy, green, red } from "./deps.ts";
 import { assertEquals, StringReader } from "./dev_deps.ts";
 import { xrun } from "./util.ts";
 
@@ -27,6 +27,7 @@ Deno.test("normal", async () => {
   assertEquals(
     data,
     normalize(`
+.js is a directory. Skipping this item.
 1.js ... ${green("ok")}
 1.ts ... ${green("ok")}
 2.js ${red("missing copyright!")}
