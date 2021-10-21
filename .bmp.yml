@@ -6,3 +6,4 @@ files:
     - license_checker@v%.%.%/main.ts
     - license_checker@v%.%.%/lib.ts
   main.ts: console.log("%.%.%")
+  build_npm.ts: 'version: "%.%.%"'
