@@ -18,6 +18,9 @@ await build({
     version: "3.1.4",
     description: "📄 CLI tool for checking license headers in files",
     license: "MIT",
+    bin: {
+      license_checker: "./umd/main.js",
+    },
     repository: {
       type: "git",
       url: "git+https://github.com/kt3k/deno_license_checker.git",
