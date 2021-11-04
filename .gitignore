@@ -1,3 +1,6 @@
 deno.d.ts
 .idea
 coverage
+
+# for dnt output
+npm

@@ -1,7 +1,7 @@
 // Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { blue, copy, green, red } from "./deps.ts";
-import { assertEquals, StringReader } from "./dev_deps.ts";
+import { assertEquals, isNode, StringReader } from "./dev_deps.ts";
 import { xrun } from "./util.ts";
 
 const normalize = (output: string) =>
@@ -10,8 +10,9 @@ const normalize = (output: string) =>
     .replace(/\\/g, "/")
     .split(/\r?\n/)
     .sort();
+const mainFilePath = isNode ? "../../main.js" : "../../main.ts";
 
-const baseArgs = [
+const baseArgs = isNode ? ["node"] : [
   Deno.execPath(),
   "run",
   "--unstable",
@@ -22,7 +23,7 @@ const baseArgs = [
 
 Deno.test("normal", async () => {
   const data = normalize(
-    await xrun([...baseArgs, "../../main.ts"], "testdata/normal"),
+    await xrun([...baseArgs, mainFilePath], "testdata/normal"),
   );
   assertEquals(
     data,
@@ -43,7 +44,7 @@ foo/bar/baz/2.js ${red("missing copyright!")}
 
 Deno.test("quiet", async () => {
   const data = normalize(
-    await xrun([...baseArgs, "../../main.ts", "-q"], "testdata/normal"),
+    await xrun([...baseArgs, mainFilePath, "-q"], "testdata/normal"),
   );
   assertEquals(
     data,
@@ -58,7 +59,7 @@ foo/bar/baz/2.js ${red("missing copyright!")}
 
 Deno.test("multiline", async () => {
   const data = normalize(
-    await xrun([...baseArgs, "../../main.ts"], "testdata/multiline"),
+    await xrun([...baseArgs, mainFilePath], "testdata/multiline"),
   );
   assertEquals(
     data,
@@ -72,7 +73,7 @@ foo/bar/baz/2.ts ${red("missing copyright!")}
 
 Deno.test("multiconfig", async () => {
   const data = normalize(
-    await xrun([...baseArgs, "../../main.ts"], "testdata/multiconfig"),
+    await xrun([...baseArgs, mainFilePath], "testdata/multiconfig"),
   );
   assertEquals(
     data,
@@ -105,7 +106,7 @@ Deno.test("inject", async () => {
     f2.close();
     const data = normalize(
       await xrun(
-        [...baseArgs, "../../main.ts", "--inject"],
+        [...baseArgs, mainFilePath, "--inject"],
         "testdata/inject",
       ),
     );
