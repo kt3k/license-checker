@@ -18,7 +18,7 @@ deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.4/main
 Install via npm:
 
 ```shell
-npm install -g @kt3k/license_checker
+npm install -g @kt3k/license-checker
 ```
 
 Now `license_checker` command should be available.
@@ -50,7 +50,7 @@ deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.4/main
 Alternatively
 
 ```console
-npx @kt3k/license_checker
+npx @kt3k/license-checker
 ```
 
 # `.licenserc.json`
