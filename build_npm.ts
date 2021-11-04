@@ -4,6 +4,7 @@ import { copy } from "https://deno.land/std@0.113.0/fs/mod.ts";
 await Deno.remove("npm", { recursive: true }).catch((_) => {});
 await copy("testdata", "npm/esm/testdata", { overwrite: true });
 await copy("testdata", "npm/umd/testdata", { overwrite: true });
+await copy("README.md", "npm/README.md", { overwrite: true });
 
 await build({
   entryPoints: ["./main.ts"],
