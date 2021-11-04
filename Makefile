@@ -18,6 +18,6 @@ license:
 	deno run --unstable --allow-read main.ts
 
 npm:
-	deno run --no-check --allow-read --allow-write --allow-env --allow-run=npm build_npm.ts
+	deno run --no-check --allow-read --allow-write --allow-env --allow-run=npm,cmd build_npm.ts
 
 .PHONY: test cov codecov fmt lint license npm
