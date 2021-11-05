@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/master/media/deno_license_checker.png" width="100">
 
-# deno_license_checker v3.1.4
+# deno_license_checker v3.1.6
 
 ![ci](https://github.com/kt3k/deno_license_checker/workflows/ci/badge.svg)
 [![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/master/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
@@ -12,7 +12,7 @@ This tool checks the license headers in the files in a git repository. You can c
 Install via Deno:
 
 ```shell
-deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.4/main.ts
+deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.6/main.ts
 ```
 
 Install via npm:
@@ -44,7 +44,7 @@ This checks the license lines in the files in your repository.
 If you prefer not to install the command globally, you can also use the following commands:
 
 ```console
-deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.4/main.ts
+deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.6/main.ts
 ```
 
 Alternatively
@@ -137,7 +137,7 @@ Options:
 # API
 
 ```ts
-import { checkLicense} from "https://deno.land/x/license_checker@v3.1.4/lib.ts";
+import { checkLicense} from "https://deno.land/x/license_checker@v3.1.6/lib.ts";
 ```
 
 ## `checkLicense(configs: Config[], options: Options): Promise<boolean>`
