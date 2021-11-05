@@ -174,6 +174,7 @@ MIT
 
 # History
 
+- 2021-11-05 v3.1.6 Add npm support.
 - 2021-07-22 v3.1.4 Fix directory handling.
 - 2020-08-05 v3.0.3 Update for the new registry.
 - 2020-06-23 v2.0.1 Update for deno v1.1.0.
