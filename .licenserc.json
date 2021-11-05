@@ -1,4 +1,4 @@
 {
   "**/*.{js,ts}": "Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.",
-  "ignore": ["testdata"]
+  "ignore": ["testdata", "npm"]
 }
