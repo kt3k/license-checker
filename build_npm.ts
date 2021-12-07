@@ -35,5 +35,5 @@ await build({
 await Deno.writeTextFile(
   "npm/.npmignore",
   "esm/testdata/\numd/testdata/\n",
-  { append: true }
+  { append: true },
 );

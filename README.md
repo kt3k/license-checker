@@ -5,7 +5,8 @@
 ![ci](https://github.com/kt3k/deno_license_checker/workflows/ci/badge.svg)
 [![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/master/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
 
-This tool checks the license headers in the files in a git repository. You can configure which files should have which license texts with `.licenserc.json`.
+This tool checks the license headers in the files in a git repository. You can
+configure which files should have which license texts with `.licenserc.json`.
 
 # Install
 
@@ -41,7 +42,8 @@ license_checker
 
 This checks the license lines in the files in your repository.
 
-If you prefer not to install the command globally, you can also use the following commands:
+If you prefer not to install the command globally, you can also use the
+following commands:
 
 ```console
 deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.6/main.ts
@@ -70,9 +72,9 @@ You can use any glob pattern in the keys of `.licenserc.json`
   "**/*.ts": [
     "You can put multiline headers like this",
 
-    "Copyright Foo, Inc. and other Bar contributors."
+    "Copyright Foo, Inc. and other Bar contributors.",
 
-    "Permission is hereby granted, free of charge, to any person obtaining a"
+    "Permission is hereby granted, free of charge, to any person obtaining a",
     "copy of this software and associated documentation files (the",
     "\"Software\"), to deal in the Software without restriction, including",
     "without limitation the rights to use, copy, modify, merge, publish,",
@@ -119,7 +121,9 @@ You can put multiple config in `.licenserc.json` like the below:
 ]
 ```
 
-Each object in the main array is treated independently as a single config. This is useful when the some license lines overlaps the ignore pattern of the other config.
+Each object in the main array is treated independently as a single config. This
+is useful when the some license lines overlaps the ignore pattern of the other
+config.
 
 # Options
 
@@ -137,7 +141,7 @@ Options:
 # API
 
 ```ts
-import { checkLicense} from "https://deno.land/x/license_checker@v3.1.6/lib.ts";
+import { checkLicense } from "https://deno.land/x/license_checker@v3.1.6/lib.ts";
 ```
 
 ## `checkLicense(configs: Config[], options: Options): Promise<boolean>`
@@ -146,19 +150,19 @@ Where:
 
 ```ts
 type Config = {
-  ignore?: string[]
-  config: Array<[string, (string | string[])]>
-}
+  ignore?: string[];
+  config: Array<[string, (string | string[])]>;
+};
 
 // The tuple `[string, (string | string[])]` means
 // The pair of (globPattern, license-headers)
 // This checks whether license-headers exists files of globPattern.
 
 type Options = {
-  inject: boolean
-  quiet: boolean
-  cwd: string
-}
+  inject: boolean;
+  quiet: boolean;
+  cwd: string;
+};
 ```
 
 This checks the license headers according to the given config and options.
