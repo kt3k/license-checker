@@ -20,4 +20,5 @@ jobs:
       - run: |
           make cov
           make codecov
-      - run: make npm
+      - run: |
+          make dnt
