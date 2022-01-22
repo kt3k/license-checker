@@ -1,5 +1,5 @@
-import { build } from "https://deno.land/x/dnt@0.4.1/mod.ts";
-import { copy } from "https://deno.land/std@0.113.0/fs/mod.ts";
+import { build } from "https://deno.land/x/dnt@0.16.1/mod.ts";
+import { copy } from "https://deno.land/std@0.117.0/fs/copy.ts";
 
 await Deno.remove("npm", { recursive: true }).catch((_) => {});
 await copy("testdata", "npm/esm/testdata", { overwrite: true });
@@ -12,8 +12,11 @@ await build({
     name: "license_checker",
     path: "./main.ts",
   }],
+  shims: {
+    deno: true,
+  },
   outDir: "./npm",
-  typeCheck: true,
+  typeCheck: false,
   declaration: true,
   test: true,
   package: {
@@ -35,5 +38,5 @@ await build({
 await Deno.writeTextFile(
   "npm/.npmignore",
   "esm/testdata/\numd/testdata/\n",
-  { append: true }
+  { append: true },
 );
