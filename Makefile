@@ -18,6 +18,6 @@ license:
 	deno run --unstable --allow-read main.ts
 
 dnt:
-	deno run --unstable --allow-read --allow-write --allow-env --allow-run=npm --allow-net=deno.land dnt.ts
+	deno run --unstable --allow-read --allow-write --allow-env --allow-run=npm,cmd --allow-net=deno.land dnt.ts
 
 .PHONY: test cov codecov fmt lint license npm
