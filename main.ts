@@ -70,7 +70,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("3.1.6");
+    console.log("3.1.7");
     exit(0);
   }
 
