@@ -1,5 +1,5 @@
 import { build } from "https://deno.land/x/dnt@0.16.1/mod.ts";
-import { copy } from "https://deno.land/std@0.117.0/fs/copy.ts";
+import { copy } from "https://deno.land/std@0.123.0/fs/copy.ts";
 
 await Deno.remove("npm", { recursive: true }).catch((_) => {});
 await copy("testdata", "npm/esm/testdata", { overwrite: true });
