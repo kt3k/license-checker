@@ -15,6 +15,7 @@ async function readConfig(
     data = await readConfigFile(config);
     console.log(`Using config file "${config}"`);
   } catch (_e) {
+    console.log(_e);
     console.log(`Error: config file "${config}" not found.`);
     exit(1);
   }

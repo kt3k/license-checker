@@ -1,6 +1,6 @@
 .PHONY: test
 test:
-	deno test --unstable --allow-read --allow-write --allow-run test.ts
+	deno test --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts
 
 .PHONY: cov
 cov:

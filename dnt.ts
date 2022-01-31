@@ -14,6 +14,10 @@ await build({
   }],
   shims: {
     deno: true,
+    undici: true,
+  },
+  redirects: {
+    "./serve.ts": "serve_node.ts",
   },
   outDir: "./npm",
   typeCheck: false,

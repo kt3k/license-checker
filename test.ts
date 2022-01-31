@@ -2,6 +2,7 @@
 
 import { blue, copy, green, red } from "./deps.ts";
 import { assertEquals, isNode, StringReader } from "./dev_deps.ts";
+import serve from "./serve.ts";
 import { xrun } from "./util.ts";
 
 const normalize = (output: string) =>
@@ -16,8 +17,8 @@ const baseArgs = isNode ? ["node", "../../main.js"] : [
   "run",
   "--unstable",
   "--allow-read",
-  "--allow-run",
   "--allow-write",
+  "--allow-net=localhost:8000",
   "../../main.ts",
 ];
 
@@ -41,20 +42,21 @@ foo/bar/baz/1.js ... ${green("ok")}
 foo/bar/baz/2.js ${red("missing copyright!")}
 `),
   );
-});
+})
 
 Deno.test("url config", async () => {
+  const close = serve();
   const data = normalize(
     await xrun([
       ...baseArgs,
       "--config",
-      new URL("./testdata/normal/.licenserc2.json", import.meta.url).href,
+      "http://localhost:8000/licenserc.json",
     ], "testdata/normal"),
   );
   assertEquals(
     data,
     normalize(`
-Using config file "${new URL("./", import.meta.url).href}testdata/normal/.licenserc2.json"
+Using config file "http://localhost:8000/licenserc.json"
 .js is a directory. Skipping this item.
 1.js ${red("missing copyright!")}
 1.ts ... ${green("ok")}
@@ -67,6 +69,7 @@ foo/bar/baz/1.js ${red("missing copyright!")}
 foo/bar/baz/2.js ${red("missing copyright!")}
 `),
   );
+  await close();
 });
 
 Deno.test("quiet", async () => {
