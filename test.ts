@@ -42,7 +42,7 @@ foo/bar/baz/1.js ... ${green("ok")}
 foo/bar/baz/2.js ${red("missing copyright!")}
 `),
   );
-})
+});
 
 Deno.test("url config", async () => {
   const close = serve();

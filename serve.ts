@@ -6,11 +6,11 @@ export default function () {
   const server = serve(() => {
     return new Response(JSON.stringify({
       "**/*.js": "Copyright js haha",
-      "**/*.ts": "Copyright ts"
+      "**/*.ts": "Copyright ts",
     }));
   }, { signal });
   return () => {
     controller.abort();
     return server;
-  }
+  };
 }

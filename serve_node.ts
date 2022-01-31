@@ -4,7 +4,7 @@ export default function () {
   const server = http.createServer((_req: any, res: any) => {
     res.end(JSON.stringify({
       "**/*.js": "Copyright js haha",
-      "**/*.ts": "Copyright ts"
+      "**/*.ts": "Copyright ts",
     }));
   });
   server.listen(8000);
@@ -12,7 +12,7 @@ export default function () {
     return new Promise<void>((resolve) => {
       server.close(() => {
         resolve();
-      })
+      });
     });
-  }
+  };
 }
