@@ -10,24 +10,25 @@ const normalize = (output: string) =>
     .replace(/\\/g, "/")
     .split(/\r?\n/)
     .sort();
-const mainFilePath = isNode ? "../../main.js" : "../../main.ts";
 
-const baseArgs = isNode ? ["node"] : [
+const baseArgs = isNode ? ["node", "../../main.js"] : [
   Deno.execPath(),
   "run",
   "--unstable",
   "--allow-read",
   "--allow-run",
   "--allow-write",
+  "../../main.ts",
 ];
 
 Deno.test("normal", async () => {
   const data = normalize(
-    await xrun([...baseArgs, mainFilePath], "testdata/normal"),
+    await xrun([...baseArgs], "testdata/normal"),
   );
   assertEquals(
     data,
     normalize(`
+Using config file ".licenserc.json"
 .js is a directory. Skipping this item.
 1.js ... ${green("ok")}
 1.ts ... ${green("ok")}
@@ -42,13 +43,40 @@ foo/bar/baz/2.js ${red("missing copyright!")}
   );
 });
 
-Deno.test("quiet", async () => {
+Deno.test("url config", async () => {
   const data = normalize(
-    await xrun([...baseArgs, mainFilePath, "-q"], "testdata/normal"),
+    await xrun([
+      ...baseArgs,
+      "--config",
+      new URL("./testdata/normal/.licenserc2.json", import.meta.url).href,
+    ], "testdata/normal"),
   );
   assertEquals(
     data,
     normalize(`
+Using config file "file:///Users/kt3k/oss/deno_license_checker/testdata/normal/.licenserc2.json"
+.js is a directory. Skipping this item.
+1.js ${red("missing copyright!")}
+1.ts ... ${green("ok")}
+2.js ${red("missing copyright!")}
+foo/1.js ${red("missing copyright!")}
+foo/2.js ${red("missing copyright!")}
+foo/bar/1.js ${red("missing copyright!")}
+foo/bar/2.js ${red("missing copyright!")}
+foo/bar/baz/1.js ${red("missing copyright!")}
+foo/bar/baz/2.js ${red("missing copyright!")}
+`),
+  );
+});
+
+Deno.test("quiet", async () => {
+  const data = normalize(
+    await xrun([...baseArgs, "-q"], "testdata/normal"),
+  );
+  assertEquals(
+    data,
+    normalize(`
+Using config file ".licenserc.json"
 2.js ${red("missing copyright!")}
 foo/2.js ${red("missing copyright!")}
 foo/bar/2.js ${red("missing copyright!")}
@@ -59,11 +87,12 @@ foo/bar/baz/2.js ${red("missing copyright!")}
 
 Deno.test("multiline", async () => {
   const data = normalize(
-    await xrun([...baseArgs, mainFilePath], "testdata/multiline"),
+    await xrun([...baseArgs], "testdata/multiline"),
   );
   assertEquals(
     data,
     normalize(`
+Using config file ".licenserc.json"
 1.ts ... ${green("ok")}
 foo/bar/baz/1.ts ... ${green("ok")}
 foo/bar/baz/2.ts ${red("missing copyright!")}
@@ -73,11 +102,12 @@ foo/bar/baz/2.ts ${red("missing copyright!")}
 
 Deno.test("multiconfig", async () => {
   const data = normalize(
-    await xrun([...baseArgs, mainFilePath], "testdata/multiconfig"),
+    await xrun([...baseArgs], "testdata/multiconfig"),
   );
   assertEquals(
     data,
     normalize(`
+Using config file ".licenserc.json"
 1.ts ... ${green("ok")}
 2.ts ... ${green("ok")}
 `),
@@ -87,11 +117,11 @@ Deno.test("multiconfig", async () => {
 Deno.test("inject", async () => {
   try {
     const confJson = JSON.parse(
-      await readFileText("testdata/inject/.licenserc.json"),
+      readFileText("testdata/inject/.licenserc.json"),
     );
     const liceses = confJson["**/*.ts"].join("\n");
-    const t1 = await readFileText("testdata/inject/1.ts.tmp");
-    const t2 = await readFileText("testdata/inject/2.ts.tmp");
+    const t1 = readFileText("testdata/inject/1.ts.tmp");
+    const t2 = readFileText("testdata/inject/2.ts.tmp");
     const f1 = await Deno.open(
       "testdata/inject/1.ts",
       { write: true, truncate: true },
@@ -106,20 +136,21 @@ Deno.test("inject", async () => {
     f2.close();
     const data = normalize(
       await xrun(
-        [...baseArgs, mainFilePath, "--inject"],
+        [...baseArgs, "--inject"],
         "testdata/inject",
       ),
     );
     assertEquals(
       data,
       normalize(`
+Using config file ".licenserc.json"
 1.ts ... ${green("ok")}
 2.ts ${blue("missing copyright. injecting ... done")}
 `),
     );
-    assertEquals(await readFileText("testdata/inject/1.ts"), t1);
+    assertEquals(readFileText("testdata/inject/1.ts"), t1);
     assertEquals(
-      await readFileText("testdata/inject/2.ts"),
+      readFileText("testdata/inject/2.ts"),
       `${liceses}\n${t2}`,
     );
   } catch (e) {
@@ -133,6 +164,6 @@ Deno.test("inject", async () => {
   }
 });
 
-async function readFileText(file: string) {
-  return new TextDecoder().decode(await Deno.readFileSync(file));
+function readFileText(file: string) {
+  return new TextDecoder().decode(Deno.readFileSync(file));
 }

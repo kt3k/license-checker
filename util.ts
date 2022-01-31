@@ -1,5 +1,6 @@
 // Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
 
+const { readFile } = Deno;
 import { posix, win32 } from "./deps.ts";
 
 const decoder = new TextDecoder();
@@ -35,4 +36,15 @@ export function delay(n: number): Promise<void> {
   return new Promise((resolve, _) => {
     setTimeout(() => resolve(), n);
   });
+}
+
+export async function readConfigFile(config: string): Promise<Uint8Array> {
+  if (
+    config.startsWith("http://") || config.startsWith("https://") ||
+    config.startsWith("file://")
+  ) {
+    const resp = await fetch(config);
+    return new Uint8Array(await resp.arrayBuffer());
+  }
+  return readFile(config);
 }
