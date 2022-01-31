@@ -25,6 +25,7 @@ license:
 
 .PHONY: dnt
 dnt:
+	rm -rf npm
 	deno run --unstable --allow-read --allow-write --allow-env --allow-run=npm,cmd --allow-net=deno.land dnt.ts
 
 .PHONY: udd
