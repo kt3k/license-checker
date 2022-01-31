@@ -54,7 +54,7 @@ Deno.test("url config", async () => {
   assertEquals(
     data,
     normalize(`
-Using config file "file:///Users/kt3k/oss/deno_license_checker/testdata/normal/.licenserc2.json"
+Using config file "${new URL("./", import.meta.url).href}testdata/normal/.licenserc2.json"
 .js is a directory. Skipping this item.
 1.js ${red("missing copyright!")}
 1.ts ... ${green("ok")}
