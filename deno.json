@@ -1,0 +1,19 @@
+{
+  "fmt": {
+    "files": {
+      "exclude": [
+        "npm",
+        "coverage"
+      ]
+    }
+  },
+  "lint": {
+    "files": {
+      "exclude": [
+        "npm",
+        "coverage",
+        "testdata"
+      ]
+    }
+  }
+}

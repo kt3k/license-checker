@@ -1,10 +1,10 @@
 .PHONY: test
 test:
-	deno test --unstable --allow-read --allow-write --allow-run test.ts
+	deno test --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts
 
 .PHONY: cov
 cov:
-	deno test --coverage=coverage --unstable --allow-read --allow-write --allow-run test.ts
+	deno test --coverage=coverage --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts
 	deno coverage --unstable --lcov coverage > coverage/lcov.info
 
 .PHONY: codecov

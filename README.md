@@ -13,7 +13,7 @@ configure which files should have which license texts with `.licenserc.json`.
 Install via Deno:
 
 ```shell
-deno run --unstable --allow-read https://deno.land/x/license_checker@v3.1.7/main.ts
+deno run --unstable --allow-read --prompt https://deno.land/x/license_checker@v3.1.7/main.ts
 ```
 
 Install via npm:

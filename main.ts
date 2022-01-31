@@ -1,9 +1,8 @@
 // Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-const { exit, args, readFile } = Deno;
+const { exit, args } = Deno;
 import { parse } from "./deps.ts";
-
-import { decode } from "./util.ts";
+import { decode, readConfigFile } from "./util.ts";
 import type { Config } from "./lib.ts";
 import { checkLicense } from "./lib.ts";
 
@@ -13,8 +12,10 @@ async function readConfig(
   let data: Uint8Array;
   let configObj;
   try {
-    data = await readFile(config);
+    data = await readConfigFile(config);
+    console.log(`Using config file "${config}"`);
   } catch (_e) {
+    console.log(_e);
     console.log(`Error: config file "${config}" not found.`);
     exit(1);
   }
@@ -52,6 +53,7 @@ type Opts = {
   version?: boolean;
   quiet?: boolean;
   inject?: boolean;
+  config?: string;
 };
 
 const main = async (opts: Opts) => {
@@ -74,7 +76,7 @@ Options:
     exit(0);
   }
 
-  const configList = await readConfig();
+  const configList = await readConfig(opts.config);
 
   if (
     await checkLicense(configList, {
@@ -90,12 +92,14 @@ Options:
 
 main(
   parse(args, {
+    string: ["config"],
     boolean: ["quiet", "help", "version", "inject"],
     alias: {
       q: "quiet",
       i: "inject",
       h: "help",
       v: "version",
+      c: "config",
     },
     // deno-lint-ignore no-explicit-any
   }) as any,
