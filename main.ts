@@ -106,6 +106,5 @@ main(
       v: "version",
       c: "config",
     },
-    // deno-lint-ignore no-explicit-any
-  }) as any,
+  }),
 );
