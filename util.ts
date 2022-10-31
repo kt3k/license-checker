@@ -32,12 +32,6 @@ export function relative(base: string, path: string): string {
   }
 }
 
-export function delay(n: number): Promise<void> {
-  return new Promise((resolve, _) => {
-    setTimeout(() => resolve(), n);
-  });
-}
-
 export async function readConfigFile(config: string): Promise<Uint8Array> {
   if (
     config.startsWith("http://") || config.startsWith("https://") ||
