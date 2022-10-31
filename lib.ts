@@ -3,7 +3,7 @@
 import writeFile = Deno.writeFile;
 
 const { readFile } = Deno;
-import { blue, includesNeedle, expandGlob, green, red } from "./deps.ts";
+import { blue, contains, expandGlob, green, red } from "./deps.ts";
 
 import { decode, delay, encode, relative } from "./util.ts";
 
@@ -33,7 +33,7 @@ const checkFile = async (
   await Deno.read(file.rid, sourceCode);
   Deno.close(file.rid);
 
-  if (copyrightLines.every((line) => includesNeedle(sourceCode, line))) {
+  if (copyrightLines.every((line) => contains(sourceCode, line))) {
     if (!quiet) {
       console.log(filename, "...", green("ok"));
     }
