@@ -1,6 +1,6 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { build } from "https://deno.land/x/dnt@0.24.0/mod.ts";
+import { build } from "https://deno.land/x/dnt@0.25.0/mod.ts";
 import { copy } from "https://deno.land/std@0.161.0/fs/copy.ts";
 
 await Deno.remove("npm", { recursive: true }).catch((_) => {});
@@ -26,7 +26,7 @@ await build({
   declaration: true,
   test: true,
   compilerOptions: {
-    lib: ["lib.es2021.d.ts", "lib.dom.d.ts"],
+    lib: ["es2021", "dom"],
   },
   package: {
     // package.json properties
