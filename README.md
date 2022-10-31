@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/master/media/deno_license_checker.png" width="100">
 
-# deno_license_checker v3.2.0
+# deno_license_checker v3.2.1
 
 ![ci](https://github.com/kt3k/deno_license_checker/workflows/ci/badge.svg)
 [![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/master/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
@@ -13,7 +13,7 @@ configure which files should have which license texts with `.licenserc.json`.
 Use via Deno:
 
 ```shell
-deno run --allow-read https://deno.land/x/license_checker@v3.2.0/main.ts
+deno run --allow-read https://deno.land/x/license_checker@v3.2.1/main.ts
 ```
 
 Use via npx:
@@ -44,7 +44,7 @@ If you prefer not to install the command globally, you can also use the
 following commands:
 
 ```console
-deno run --unstable --allow-read https://deno.land/x/license_checker@v3.2.0/main.ts
+deno run --unstable --allow-read https://deno.land/x/license_checker@v3.2.1/main.ts
 ```
 
 Alternatively
@@ -139,7 +139,7 @@ Options:
 # API
 
 ```ts
-import { checkLicense } from "https://deno.land/x/license_checker@v3.2.0/lib.ts";
+import { checkLicense } from "https://deno.land/x/license_checker@v3.2.1/lib.ts";
 ```
 
 ## `checkLicense(configs: Config[], options: Options): Promise<boolean>`

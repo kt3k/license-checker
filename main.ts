@@ -72,7 +72,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("3.2.0");
+    console.log("3.2.1");
     exit(0);
   }
 
