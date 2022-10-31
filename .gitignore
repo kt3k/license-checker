@@ -1,7 +1,4 @@
-deno.d.ts
 .idea
 coverage
 .vscode
-
-# for dnt output
 npm
