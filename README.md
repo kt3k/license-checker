@@ -169,11 +169,6 @@ This checks the license headers according to the given config and options.
 
 MIT
 
-# See also
-
-- GitHub action version of this tool
-  - https://github.com/kt3k/license_checker
-
 # History
 
 - 2022-02-01 v3.2.0 Support url config.
