@@ -3,6 +3,7 @@
 import http from "http";
 
 export default function () {
+  // deno-lint-ignore no-explicit-any
   const server = http.createServer((_req: any, res: any) => {
     res.end(JSON.stringify({
       "**/*.js": "Copyright js haha",
