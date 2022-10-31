@@ -1,4 +1,4 @@
-// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+// Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 const { exit, args } = Deno;
 import { parse } from "./deps.ts";

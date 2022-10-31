@@ -1,4 +1,4 @@
-// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+// Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { blue, copy, green, red } from "./deps.ts";
 import { assertEquals, isNode, StringReader } from "./dev_deps.ts";

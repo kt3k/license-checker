@@ -1,4 +1,4 @@
-// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+// Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 export { assertEquals } from "https://deno.land/std@0.123.0/testing/asserts.ts";
 export { StringReader } from "https://deno.land/std@0.123.0/io/readers.ts";

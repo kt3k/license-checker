@@ -1,4 +1,4 @@
-// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+// Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { serve } from "./dev_deps.ts";
 

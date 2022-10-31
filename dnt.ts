@@ -1,4 +1,4 @@
-// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+// Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { build } from "https://deno.land/x/dnt@0.16.1/mod.ts";
 import { copy } from "https://deno.land/std@0.123.0/fs/copy.ts";
