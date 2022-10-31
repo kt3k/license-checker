@@ -3,9 +3,17 @@
 import writeFile = Deno.writeFile;
 
 const { readFile } = Deno;
-import { blue, contains, delay, expandGlob, green, red } from "./deps.ts";
+import {
+  blue,
+  contains,
+  delay,
+  expandGlob,
+  green,
+  red,
+  relative,
+} from "./deps.ts";
 
-import { decode, encode, relative } from "./util.ts";
+import { decode, encode } from "./util.ts";
 
 type LicenseLines = string | string[];
 

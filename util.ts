@@ -1,7 +1,6 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 const { readFile } = Deno;
-import { posix, win32 } from "./deps.ts";
 
 const decoder = new TextDecoder();
 export const decode = (data: Uint8Array): string => decoder.decode(data);
@@ -22,14 +21,6 @@ async function run(args: string[], cwd?: string): Promise<Uint8Array> {
 
 export async function xrun(args: string[], cwd?: string): Promise<string> {
   return decode(await run(args, cwd));
-}
-
-export function relative(base: string, path: string): string {
-  if (Deno.build.os === "windows") {
-    return win32.relative(base, path);
-  } else {
-    return posix.relative(base, path);
-  }
 }
 
 export async function readConfigFile(config: string): Promise<Uint8Array> {
