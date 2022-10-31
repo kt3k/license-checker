@@ -8,7 +8,7 @@
 This tool checks the license headers in the files in a git repository. You can
 configure which files should have which license texts with `.licenserc.json`.
 
-# Usage
+# Getting Started
 
 Use via Deno:
 
