@@ -3,24 +3,20 @@
 const { readFile } = Deno;
 
 const decoder = new TextDecoder();
-export const decode = (data: Uint8Array): string => decoder.decode(data);
+export const decode = (data: Uint8Array) => decoder.decode(data);
 
 const encoder = new TextEncoder();
-export const encode = (str: string): Uint8Array => encoder.encode(str);
+export const encode = (str: string) => encoder.encode(str);
 
-async function run(args: string[], cwd?: string): Promise<Uint8Array> {
+export async function run(args: string[], cwd?: string) {
   const p = Deno.run({
-    cmd: Deno.build.os === "windows" ? ["cmd.exe", "/c", ...args] : args,
+    cmd: args,
     stdout: "piped",
     cwd,
   });
   const result = await p.output();
   p.close();
-  return result;
-}
-
-export async function xrun(args: string[], cwd?: string): Promise<string> {
-  return decode(await run(args, cwd));
+  return decode(result);
 }
 
 export async function readConfigFile(config: string): Promise<Uint8Array> {
