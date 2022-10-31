@@ -8,21 +8,19 @@
 This tool checks the license headers in the files in a git repository. You can
 configure which files should have which license texts with `.licenserc.json`.
 
-# Install
+# Usage
 
-Install via Deno:
-
-```shell
-deno run --unstable --allow-read --prompt https://deno.land/x/license_checker@v3.2.0/main.ts
-```
-
-Install via npm:
+Use via Deno:
 
 ```shell
-npm install -g @kt3k/license-checker
+deno run --allow-read https://deno.land/x/license_checker@v3.2.0/main.ts
 ```
 
-Now `license_checker` command should be available.
+Use via npx:
+
+```shell
+npx @kt3k/license-checker
+```
 
 # Usage
 
