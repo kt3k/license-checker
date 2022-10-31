@@ -1,9 +1,9 @@
-<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/master/media/deno_license_checker.png" width="100">
+<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/main/media/deno_license_checker.png" width="100">
 
 # deno_license_checker v3.2.2
 
 ![ci](https://github.com/kt3k/deno_license_checker/workflows/ci/badge.svg)
-[![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/master/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
+[![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/main/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
 
 This tool checks the license headers in the files in a git repository. You can
 configure which files should have which license texts with `.licenserc.json`.
