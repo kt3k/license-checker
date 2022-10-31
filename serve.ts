@@ -1,6 +1,6 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { serve } from "./dev_deps.ts";
+import { serve } from "https://deno.land/std@0.161.0/http/server.ts";
 
 export default function () {
   const controller = new AbortController();

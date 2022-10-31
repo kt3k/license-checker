@@ -22,6 +22,6 @@
     "codecov": "curl -s https://codecov.io/bash | bash",
     "lint:license": "deno run --unstable --allow-read main.ts",
     "dnt": "rm -rf npm && deno run --unstable --allow-read --allow-write --allow-env --allow-run=npm,cmd --allow-net=deno.land dnt.ts",
-    "udd": "deno run -A https://deno.land/x/udd@0.5.0/main.ts deps.ts dev_deps.ts dnt.ts"
+    "udd": "deno run -A https://deno.land/x/udd@0.5.0/main.ts deps.ts serve.ts test.ts dnt.ts"
   }
 }

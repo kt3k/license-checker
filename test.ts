@@ -1,9 +1,11 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { blue, copy, green, red } from "./deps.ts";
-import { assertEquals, isNode, StringReader } from "./dev_deps.ts";
+import { assertEquals } from "https://deno.land/std@0.161.0/testing/asserts.ts";
+import { StringReader } from "https://deno.land/std@0.161.0/io/readers.ts";
 import serve from "./serve.ts";
 import { xrun } from "./util.ts";
+import { isNode } from "https://deno.land/x/which_runtime@0.2.0/mod.ts";
 
 const normalize = (output: string) =>
   output
@@ -168,5 +170,5 @@ Using config file ".licenserc.json"
 });
 
 function readFileText(file: string) {
-  return new TextDecoder().decode(Deno.readFileSync(file));
+  return Deno.readTextFileSync(file);
 }
