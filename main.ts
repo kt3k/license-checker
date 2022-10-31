@@ -1,31 +1,36 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-const { exit, args } = Deno;
 import { parse } from "./deps.ts";
-import { decode, readConfigFile } from "./util.ts";
-import type { Config } from "./lib.ts";
-import { checkLicense } from "./lib.ts";
+import { checkLicense, type Config } from "./lib.ts";
 
 async function readConfig(
   config = ".licenserc.json",
 ): Promise<Array<Config>> {
-  let data: Uint8Array;
+  let text: string;
   let configObj;
   try {
-    data = await readConfigFile(config);
+    if (
+      config.startsWith("http://") || config.startsWith("https://") ||
+      config.startsWith("file://")
+    ) {
+      const resp = await fetch(config)
+      text = await resp.text();
+    } else {
+      text = await Deno.readTextFile(config);
+    }
     console.log(`Using config file "${config}"`);
   } catch (_e) {
     console.log(_e);
     console.log(`Error: config file "${config}" not found.`);
-    exit(1);
+    Deno.exit(1);
   }
 
   try {
-    configObj = JSON.parse(decode(data!));
+    configObj = JSON.parse(text);
   } catch (e) {
     console.log(`Error: Failed to parse "${config}" as JSON.`);
     console.log(e);
-    exit(1);
+    Deno.exit(1);
   }
 
   let configObjArray: Array<Config>;
@@ -68,12 +73,12 @@ Options:
   -i, --inject             Inject license into head if missing.
   -c, --config <filename>  Specify config filename. Default is '.licenserc.json'.
 `);
-    exit(0);
+    Deno.exit(0);
   }
 
   if (opts.version) {
     console.log("3.2.2");
-    exit(0);
+    Deno.exit(0);
   }
 
   const configList = await readConfig(opts.config);
@@ -84,14 +89,14 @@ Options:
       quiet: opts.quiet,
     })
   ) {
-    exit(0);
+    Deno.exit(0);
   } else {
-    exit(1);
+    Deno.exit(1);
   }
 };
 
 main(
-  parse(args, {
+  parse(Deno.args, {
     string: ["config"],
     boolean: ["quiet", "help", "version", "inject"],
     alias: {

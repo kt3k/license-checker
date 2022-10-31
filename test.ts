@@ -4,8 +4,14 @@ import { blue, copy, green, red } from "./deps.ts";
 import { assertEquals } from "https://deno.land/std@0.161.0/testing/asserts.ts";
 import { StringReader } from "https://deno.land/std@0.161.0/io/readers.ts";
 import serve from "./serve.ts";
-import { run } from "./util.ts";
 import { isNode } from "https://deno.land/x/which_runtime@0.2.0/mod.ts";
+
+async function run(args: string[], cwd?: string) {
+  const p = Deno.run({ cmd: args, stdout: "piped", cwd });
+  const result = await p.output();
+  p.close();
+  return new TextDecoder().decode(result);
+}
 
 const normalize = (output: string) =>
   output
