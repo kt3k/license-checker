@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/main/media/logo.svg" width="300">
+<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/main/.github/logo.svg" width="300">
 
 # license_checker v3.2.2
 
