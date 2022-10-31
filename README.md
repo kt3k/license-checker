@@ -192,11 +192,11 @@ MIT
 See dev commands:
 
 ```sh
-./s
+deno task
 ```
 
 Run test:
 
 ```sh
-./s test
+deno task test
 ```
