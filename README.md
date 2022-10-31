@@ -44,7 +44,7 @@ If you prefer not to install the command globally, you can also use the
 following commands:
 
 ```console
-deno run --unstable --allow-read https://deno.land/x/license_checker@v3.2.1/main.ts
+deno run --allow-read https://deno.land/x/license_checker@v3.2.1/main.ts
 ```
 
 Alternatively
