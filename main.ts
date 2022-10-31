@@ -13,7 +13,7 @@ async function readConfig(
       config.startsWith("http://") || config.startsWith("https://") ||
       config.startsWith("file://")
     ) {
-      const resp = await fetch(config)
+      const resp = await fetch(config);
       text = await resp.text();
     } else {
       text = await Deno.readTextFile(config);
