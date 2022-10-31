@@ -1,6 +1,6 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { build } from "https://deno.land/x/dnt@0.19.0/mod.ts";
+import { build } from "https://deno.land/x/dnt@0.24.0/mod.ts";
 import { copy } from "https://deno.land/std@0.161.0/fs/copy.ts";
 
 await Deno.remove("npm", { recursive: true }).catch((_) => {});
@@ -18,13 +18,16 @@ await build({
     deno: true,
     undici: true,
   },
-  redirects: {
+  mappings: {
     "./serve.ts": "serve_node.ts",
   },
   outDir: "./npm",
   typeCheck: false,
   declaration: true,
   test: true,
+  compilerOptions: {
+    lib: ["lib.es2021.d.ts", "lib.dom.d.ts"],
+  },
   package: {
     // package.json properties
     name: "@kt3k/license-checker",
