@@ -4,7 +4,7 @@ import { blue, copy, green, red } from "./deps.ts";
 import { assertEquals } from "https://deno.land/std@0.161.0/testing/asserts.ts";
 import { StringReader } from "https://deno.land/std@0.161.0/io/readers.ts";
 import serve from "./serve.ts";
-import { xrun } from "./util.ts";
+import { run } from "./util.ts";
 import { isNode } from "https://deno.land/x/which_runtime@0.2.0/mod.ts";
 
 const normalize = (output: string) =>
@@ -26,7 +26,7 @@ const baseArgs = isNode ? ["node", "../../main.js"] : [
 
 Deno.test("normal", async () => {
   const data = normalize(
-    await xrun([...baseArgs], "testdata/normal"),
+    await run([...baseArgs], "testdata/normal"),
   );
   assertEquals(
     data,
@@ -49,7 +49,7 @@ foo/bar/baz/2.js ${red("missing copyright!")}
 Deno.test("url config", async () => {
   const close = serve();
   const data = normalize(
-    await xrun([
+    await run([
       ...baseArgs,
       "--config",
       "http://localhost:8000/licenserc.json",
@@ -76,7 +76,7 @@ foo/bar/baz/2.js ${red("missing copyright!")}
 
 Deno.test("quiet", async () => {
   const data = normalize(
-    await xrun([...baseArgs, "-q"], "testdata/normal"),
+    await run([...baseArgs, "-q"], "testdata/normal"),
   );
   assertEquals(
     data,
@@ -92,7 +92,7 @@ foo/bar/baz/2.js ${red("missing copyright!")}
 
 Deno.test("multiline", async () => {
   const data = normalize(
-    await xrun([...baseArgs], "testdata/multiline"),
+    await run([...baseArgs], "testdata/multiline"),
   );
   assertEquals(
     data,
@@ -107,7 +107,7 @@ foo/bar/baz/2.ts ${red("missing copyright!")}
 
 Deno.test("multiconfig", async () => {
   const data = normalize(
-    await xrun([...baseArgs], "testdata/multiconfig"),
+    await run([...baseArgs], "testdata/multiconfig"),
   );
   assertEquals(
     data,
@@ -140,7 +140,7 @@ Deno.test("inject", async () => {
     f1.close();
     f2.close();
     const data = normalize(
-      await xrun(
+      await run(
         [...baseArgs, "--inject"],
         "testdata/inject",
       ),
