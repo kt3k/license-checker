@@ -1,12 +1,11 @@
-<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/main/media/deno_license_checker.png" width="100">
+<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/main/media/logo.svg" width="300">
 
-# deno_license_checker v3.2.2
+# license_checker v3.2.2
 
 ![ci](https://github.com/kt3k/deno_license_checker/workflows/ci/badge.svg)
 [![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/main/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
 
-This tool checks the license headers in the files in a git repository. You can
-configure which files should have which license texts with `.licenserc.json`.
+A utility for checking license headers in the files in a directory.
 
 # Usage
 
@@ -35,23 +34,10 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-license_checker
-```
-
-This checks the license lines in the files in your repository.
-
-If you prefer not to install the command globally, you can also use the
-following commands:
-
-```console
 deno run --allow-read https://deno.land/x/license_checker@v3.2.2/main.ts
 ```
 
-Alternatively
-
-```console
-npx @kt3k/license-checker
-```
+This checks the license lines in the files under the current directory.
 
 # `.licenserc.json`
 
@@ -84,9 +70,9 @@ You can use any glob pattern in the keys of `.licenserc.json`
 }
 ```
 
-### Ignore certain files
+### Ignore files
 
-You can ignore certain files by the `ignore` array in config.
+`ignore` property in the config file allows you to ignore certain files:
 
 ```js
 {
@@ -99,7 +85,7 @@ You can ignore certain files by the `ignore` array in config.
 }
 ```
 
-Note: `ignore` needs to be an array, not a string.
+`ignore` needs to be an array, not a string.
 
 ### Multiple config in `.licenserc.json`
 
