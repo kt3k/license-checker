@@ -1,3 +1,5 @@
+// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+
 import http from "http";
 
 export default function () {

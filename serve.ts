@@ -1,3 +1,5 @@
+// Copyright 2020 Yoshiya Hinosawa. All rights reserved. MIT license.
+
 import { serve } from "./dev_deps.ts";
 
 export default function () {
