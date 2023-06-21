@@ -1,4 +1,12 @@
 {
+  "tasks": {
+    "test": "deno test --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts",
+    "cov": "deno test --coverage=coverage --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts && deno coverage --unstable --lcov coverage > coverage/lcov.info",
+    "codecov": "curl -s https://codecov.io/bash | bash",
+    "lint:license": "deno run --unstable --allow-read main.ts",
+    "dnt": "rm -rf npm && deno run --unstable --allow-read --allow-write --allow-env --allow-run=npm,cmd --allow-net=deno.land dnt.ts",
+    "udd": "deno run -A https://deno.land/x/udd@0.5.0/main.ts deps.ts serve.ts test.ts dnt.ts"
+  },
   "fmt": {
     "files": {
       "exclude": [
@@ -15,13 +23,5 @@
         "testdata"
       ]
     }
-  },
-  "tasks": {
-    "test": "deno test --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts",
-    "cov": "deno test --coverage=coverage --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts && deno coverage --unstable --lcov coverage > coverage/lcov.info",
-    "codecov": "curl -s https://codecov.io/bash | bash",
-    "lint:license": "deno run --unstable --allow-read main.ts",
-    "dnt": "rm -rf npm && deno run --unstable --allow-read --allow-write --allow-env --allow-run=npm,cmd --allow-net=deno.land dnt.ts",
-    "udd": "deno run -A https://deno.land/x/udd@0.5.0/main.ts deps.ts serve.ts test.ts dnt.ts"
   }
 }
