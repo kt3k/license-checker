@@ -1,18 +1,16 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { serve } from "https://deno.land/std@0.211.0/http/server.ts";
-
 export default function () {
   const controller = new AbortController();
   const { signal } = controller;
-  const server = serve(() => {
+  const server = Deno.serve({ signal }, () => {
     return new Response(JSON.stringify({
       "**/*.js": "Copyright js haha",
       "**/*.ts": "Copyright ts",
     }));
-  }, { signal });
+  });
   return () => {
     controller.abort();
-    return server;
+    return server.finished;
   };
 }

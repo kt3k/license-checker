@@ -1,16 +1,15 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { blue, copy, green, red } from "./deps.ts";
-import { assertEquals } from "https://deno.land/std@0.211.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.211.0/assert/assert_equals.ts";
 import { StringReader } from "https://deno.land/std@0.211.0/io/string_reader.ts";
 import serve from "./serve.ts";
 import { isNode } from "https://deno.land/x/which_runtime@0.2.0/mod.ts";
 
 async function run(args: string[], cwd?: string) {
-  const p = Deno.run({ cmd: args, stdout: "piped", cwd });
-  const result = await p.output();
-  p.close();
-  return new TextDecoder().decode(result);
+  const p = new Deno.Command(args.shift()!, { args, stdout: "piped", cwd });
+  const { stdout } = await p.output();
+  return new TextDecoder().decode(stdout);
 }
 
 const normalize = (output: string) =>
