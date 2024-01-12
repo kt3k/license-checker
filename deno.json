@@ -8,20 +8,16 @@
     "udd": "deno run -A https://deno.land/x/udd@0.5.0/main.ts deps.ts serve.ts test.ts dnt.ts"
   },
   "fmt": {
-    "files": {
-      "exclude": [
-        "npm",
-        "coverage"
-      ]
-    }
+    "exclude": [
+      "npm",
+      "coverage"
+    ]
   },
   "lint": {
-    "files": {
-      "exclude": [
-        "npm",
-        "coverage",
-        "testdata"
-      ]
-    }
+    "exclude": [
+      "npm",
+      "coverage",
+      "testdata"
+    ]
   }
 }
