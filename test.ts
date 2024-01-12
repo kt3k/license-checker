@@ -1,8 +1,8 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { blue, copy, green, red } from "./deps.ts";
-import { assertEquals } from "https://deno.land/std@0.192.0/testing/asserts.ts";
-import { StringReader } from "https://deno.land/std@0.192.0/io/string_reader.ts";
+import { assertEquals } from "https://deno.land/std@0.211.0/testing/asserts.ts";
+import { StringReader } from "https://deno.land/std@0.211.0/io/string_reader.ts";
 import serve from "./serve.ts";
 import { isNode } from "https://deno.land/x/which_runtime@0.2.0/mod.ts";
 

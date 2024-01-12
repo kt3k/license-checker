@@ -1,7 +1,7 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { build } from "https://deno.land/x/dnt@0.37.0/mod.ts";
-import { copy } from "https://deno.land/std@0.192.0/fs/copy.ts";
+import { build } from "https://deno.land/x/dnt@0.39.0/mod.ts";
+import { copy } from "https://deno.land/std@0.211.0/fs/copy.ts";
 
 await Deno.remove("npm", { recursive: true }).catch((_) => {});
 await copy("testdata", "npm/script/testdata", { overwrite: true });
