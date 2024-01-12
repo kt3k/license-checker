@@ -1,8 +1,5 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import writeFile = Deno.writeFile;
-
-const { readFile } = Deno;
 import {
   blue,
   contains,
@@ -53,9 +50,9 @@ const checkFile = async (
   }
 
   if (inject) {
-    const sourceCode = await readFile(filename);
+    const sourceCode = await Deno.readFile(filename);
     console.log(`${filename} ${blue("missing copyright. injecting ... done")}`);
-    await writeFile(
+    await Deno.writeFile(
       filename,
       encode(copyrightLines.map(decode).join("\n") + "\n" + decode(sourceCode)),
     );
