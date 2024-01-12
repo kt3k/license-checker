@@ -1,6 +1,6 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import http from "http";
+import http from "node:http";
 
 export default function () {
   // deno-lint-ignore no-explicit-any

@@ -24,5 +24,7 @@ jobs:
       - run: |
           deno task cov
           deno task codecov
-      - run: deno task dnt
-        if: matrix.os == 'ubuntu-latest'
+      # TODO(kt3k): enable this again when dnt supports Deno.Command
+      # https://github.com/denoland/node_shims/issues/110
+      # - run: deno task dnt
+      #   if: matrix.os == 'ubuntu-latest'
