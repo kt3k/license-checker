@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@main
+      - uses: denoland/setup-deno@c6651c1dcd0034a1ba14332435b76e64ecaedb5d
         with:
           deno-version: v1.x
       - run: deno fmt --check
