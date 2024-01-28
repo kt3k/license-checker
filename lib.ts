@@ -39,8 +39,8 @@ const checkFile = async (
   const file = await Deno.open(filename, { read: true });
   // We assume copyright header appears in first 8KB of each file.
   const sourceCode = new Uint8Array(8192);
-  await Deno.read(file.rid, sourceCode);
-  Deno.close(file.rid);
+  await file.read(sourceCode);
+  file.close();
 
   if (copyrightLines.every((line) => contains(sourceCode, line))) {
     if (!quiet) {
