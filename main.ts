@@ -77,7 +77,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("3.2.3");
+    console.log("3.2.4");
     Deno.exit(0);
   }
 
