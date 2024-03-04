@@ -4,9 +4,7 @@ import { parse } from "./deps.ts";
 import { checkLicense, type Config } from "./lib.ts";
 
 /**
- * @module
- *
- * This module is the main entry point for the license checker tool.
+ * @module main This module is the main entry point for the license checker tool.
  *
  * Create `.licenserc.json` like the following:
  *

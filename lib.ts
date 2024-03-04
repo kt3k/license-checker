@@ -10,6 +10,10 @@ import {
   relative,
 } from "./deps.ts";
 
+/**
+ * @module lib This module exports the main functionality of the license checker.
+ */
+
 const decoder: TextDecoder = new TextDecoder();
 const decode: (data: Uint8Array) => string = (data: Uint8Array) =>
   decoder.decode(data);
@@ -20,6 +24,9 @@ const encode: (str: string) => Uint8Array = (str: string) =>
 
 type LicenseLines = string | string[];
 
+/**
+ * The main config for the license checker.
+ */
 export interface Config {
   ignore?: string[];
   config: Array<[string, LicenseLines]>;
