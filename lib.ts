@@ -10,11 +10,11 @@ import {
   relative,
 } from "./deps.ts";
 
-const decoder = new TextDecoder();
-const decode = (data: Uint8Array) => decoder.decode(data);
+const decoder: TextDecoder = new TextDecoder();
+const decode: (data: Uint8Array) => string = (data: Uint8Array) => decoder.decode(data);
 
-const encoder = new TextEncoder();
-const encode = (str: string) => encoder.encode(str);
+const encoder: TextEncoder = new TextEncoder();
+const encode: (str: string) => Uint8Array = (str: string) => encoder.encode(str);
 
 type LicenseLines = string | string[];
 
@@ -39,8 +39,8 @@ const checkFile = async (
   const file = await Deno.open(filename, { read: true });
   // We assume copyright header appears in first 8KB of each file.
   const sourceCode = new Uint8Array(8192);
-  await Deno.read(file.rid, sourceCode);
-  Deno.close(file.rid);
+  await file.read(sourceCode);
+  file.close();
 
   if (copyrightLines.every((line) => contains(sourceCode, line))) {
     if (!quiet) {
