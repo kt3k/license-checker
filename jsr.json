@@ -4,5 +4,5 @@
   "exports": {
     ".": "./lib.ts",
     "./main": "./main.ts"
-  },
+  }
 }
