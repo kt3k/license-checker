@@ -1,7 +1,7 @@
 {
   "name": "@kt3k/license-checker",
   "description": "A utility for checking license headers in the files in a directory.",
-  "version": "3.2.8",
+  "version": "3.2.9",
   "exports": {
     ".": "./lib.ts",
     "./main": "./main.ts"
