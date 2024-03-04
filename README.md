@@ -1,9 +1,9 @@
-<img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/main/.github/logo.svg" width="300">
+<img src="https://raw.githubusercontent.com/kt3k/license-checker/main/.github/logo.svg" width="300">
 
 # license-checker v3.2.9
 
-![ci](https://github.com/kt3k/deno_license_checker/workflows/ci/badge.svg)
-[![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/main/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
+![ci](https://github.com/kt3k/license-checker/workflows/ci/badge.svg)
+[![codecov](https://codecov.io/gh/kt3k/license-checker/branch/main/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/license-checker)
 
 A utility for checking license headers in the files in a directory.
 
