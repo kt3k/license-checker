@@ -12,7 +12,7 @@ A utility for checking license headers in the files in a directory.
 Use via Deno:
 
 ```shell
-deno run --allow-read https://deno.land/x/license_checker@v3.2.3/main.ts
+deno run --allow-read jsr:@kt3k/license_checker@3.2.3
 ```
 
 Use via npx:
@@ -34,7 +34,7 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-deno run --allow-read https://deno.land/x/license_checker@v3.2.3/main.ts
+deno run --allow-read jsr:@kt3k/license_checker@3.2.3
 ```
 
 This checks the license lines in the files under the current directory.
@@ -125,7 +125,7 @@ Options:
 # API
 
 ```ts
-import { checkLicense } from "https://deno.land/x/license_checker@v3.2.3/lib.ts";
+import { checkLicense } from "jsr:@kt3k/license_checker@3.2.3/lib";
 ```
 
 ## `checkLicense(configs: Config[], options: Options): Promise<boolean>`
