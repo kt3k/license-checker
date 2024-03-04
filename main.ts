@@ -4,7 +4,7 @@ import { parse } from "./deps.ts";
 import { checkLicense, type Config } from "./lib.ts";
 
 /**
- * @module main This module is the main entry point for the license checker tool.
+ * This module is the main entry point for the license checker tool.
  *
  * Create `.licenserc.json` like the following:
  *
@@ -19,8 +19,11 @@ import { checkLicense, type Config } from "./lib.ts";
  * ```
  * deno run --allow-read jsr:@kt3k/license-checker
  * ```
+ *
+ * @module
  */
 
+/** Reads Config */
 async function readConfig(
   config = ".licenserc.json",
 ): Promise<Array<Config>> {

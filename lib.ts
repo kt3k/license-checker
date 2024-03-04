@@ -14,6 +14,7 @@ import {
  * @module lib This module exports the main functionality of the license checker.
  */
 
+/** */
 const decoder: TextDecoder = new TextDecoder();
 const decode: (data: Uint8Array) => string = (data: Uint8Array) =>
   decoder.decode(data);
