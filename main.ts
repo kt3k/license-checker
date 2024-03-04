@@ -3,6 +3,26 @@
 import { parse } from "./deps.ts";
 import { checkLicense, type Config } from "./lib.ts";
 
+/**
+ * @module
+ *
+ * This module is the main entry point for the license checker tool.
+ *
+ * Create `.licenserc.json` like the following:
+ *
+ * ```json
+ * {
+ *  "*.ts": "// Copyright 2019 My Name. All rights reserved. MIT license."
+ * }
+ * ```
+ *
+ * Then, run the command
+ *
+ * ```
+ * deno run --allow-read jsr:@kt3k/license-checker
+ * ```
+ */
+
 async function readConfig(
   config = ".licenserc.json",
 ): Promise<Array<Config>> {

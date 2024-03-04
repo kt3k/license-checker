@@ -66,12 +66,18 @@ const checkFile = async (
   return false;
 };
 
-type CheckOptions = {
+/**
+ * The options for the checkLicense function.
+ */
+export type CheckOptions = {
   cwd?: string;
   quiet?: boolean;
   inject?: boolean;
 };
 
+/**
+ * Checks the license of the files in the given directory.
+ */
 export const checkLicense = async (
   configs: Config[],
   opts: CheckOptions = {},
