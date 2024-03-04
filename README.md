@@ -2,7 +2,7 @@
 
 # license-checker v3.2.9
 
-![ci](https://github.com/kt3k/license-checker/workflows/ci/badge.svg)
+[![ci](https://github.com/kt3k/license-checker/actions/workflows/ci.yml/badge.svg)](https://github.com/kt3k/license-checker/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/kt3k/license-checker/branch/main/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/license-checker)
 
 A utility for checking license headers in the files in a directory.
