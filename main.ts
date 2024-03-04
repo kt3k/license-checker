@@ -98,7 +98,7 @@ Options:
   }
 
   if (opts.version) {
-    console.log("3.2.7");
+    console.log("3.2.8");
     Deno.exit(0);
   }
 
