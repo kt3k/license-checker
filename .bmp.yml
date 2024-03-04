@@ -7,3 +7,4 @@ files:
     - license_checker@v%.%.%/lib.ts
   main.ts: console.log("%.%.%")
   dnt.ts: 'version: "%.%.%"'
+  deno.json: '"version": "%.%.%"'
