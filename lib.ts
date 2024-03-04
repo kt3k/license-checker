@@ -10,11 +10,13 @@ import {
   relative,
 } from "./deps.ts";
 
-const decoder = new TextDecoder();
-const decode = (data: Uint8Array) => decoder.decode(data);
+const decoder: TextDecoder = new TextDecoder();
+const decode: (data: Uint8Array) => string = (data: Uint8Array) =>
+  decoder.decode(data);
 
-const encoder = new TextEncoder();
-const encode = (str: string) => encoder.encode(str);
+const encoder: TextEncoder = new TextEncoder();
+const encode: (str: string) => Uint8Array = (str: string) =>
+  encoder.encode(str);
 
 type LicenseLines = string | string[];
 

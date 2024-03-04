@@ -1,4 +1,10 @@
 {
+  "name": "@kt3k/license_checker",
+  "version": "3.2.3",
+  "exports": {
+    ".": "./lib.ts",
+    "./main": "./main.ts"
+  },
   "tasks": {
     "test": "deno test --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts",
     "cov": "deno test --coverage=coverage --unstable --allow-read --allow-write --allow-run --allow-net=0.0.0.0:8000 test.ts && deno coverage --unstable --lcov coverage > coverage/lcov.info",
