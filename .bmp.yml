@@ -2,8 +2,8 @@ version: 3.2.4
 commit: Bump to version v%.%.%
 files:
   README.md:
-    - license_checker v%.%.%
-    - '@kt3k/license_checker@%.%.%'
+    - license-checker v%.%.%
+    - '@kt3k/license-checker@%.%.%'
   main.ts: console.log("%.%.%")
   dnt.ts: 'version: "%.%.%"'
   deno.json: '"version": "%.%.%"'

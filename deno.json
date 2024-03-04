@@ -1,5 +1,5 @@
 {
-  "name": "@kt3k/license_checker",
+  "name": "@kt3k/license-checker",
   "version": "3.2.4",
   "exports": {
     ".": "./lib.ts",

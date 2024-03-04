@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/kt3k/deno_license_checker/main/.github/logo.svg" width="300">
 
-# license_checker v3.2.4
+# license-checker v3.2.4
 
 ![ci](https://github.com/kt3k/deno_license_checker/workflows/ci/badge.svg)
 [![codecov](https://codecov.io/gh/kt3k/deno_license_checker/branch/main/graph/badge.svg?token=pbV4Qsg70v)](https://codecov.io/gh/kt3k/deno_license_checker)
@@ -12,7 +12,7 @@ A utility for checking license headers in the files in a directory.
 Use via Deno:
 
 ```shell
-deno run --allow-read jsr:@kt3k/license_checker@3.2.4
+deno run --allow-read jsr:@kt3k/license-checker@3.2.4
 ```
 
 Use via npx:
@@ -34,7 +34,7 @@ Create `.licenserc.json` like the following:
 Then run:
 
 ```console
-deno run --allow-read jsr:@kt3k/license_checker@3.2.4
+deno run --allow-read jsr:@kt3k/license-checker@3.2.4
 ```
 
 This checks the license lines in the files under the current directory.
@@ -125,7 +125,7 @@ Options:
 # API
 
 ```ts
-import { checkLicense } from "jsr:@kt3k/license_checker@3.2.4/lib";
+import { checkLicense } from "jsr:@kt3k/license-checker@3.2.4/lib";
 ```
 
 ## `checkLicense(configs: Config[], options: Options): Promise<boolean>`
