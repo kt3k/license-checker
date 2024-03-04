@@ -6,4 +6,4 @@ files:
     - '@kt3k/license-checker@%.%.%'
   main.ts: console.log("%.%.%")
   dnt.ts: 'version: "%.%.%"'
-  deno.json: '"version": "%.%.%"'
+  jsr.json: '"version": "%.%.%"'
