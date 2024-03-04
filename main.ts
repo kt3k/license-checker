@@ -1,8 +1,5 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
-import { parse } from "./deps.ts";
-import { checkLicense, type Config } from "./lib.ts";
-
 /**
  * This module is the main entry point for the license checker tool.
  *
@@ -22,6 +19,9 @@ import { checkLicense, type Config } from "./lib.ts";
  *
  * @module
  */
+
+import { parse } from "./deps.ts";
+import { checkLicense, type Config } from "./lib.ts";
 
 /** Reads Config */
 async function readConfig(

@@ -1,5 +1,9 @@
 // Copyright 2020-2022 Yoshiya Hinosawa. All rights reserved. MIT license.
 
+/**
+ * @module lib This module exports the main functionality of the license checker.
+ */
+
 import {
   blue,
   contains,
@@ -9,10 +13,6 @@ import {
   red,
   relative,
 } from "./deps.ts";
-
-/**
- * @module lib This module exports the main functionality of the license checker.
- */
 
 /** */
 const decoder: TextDecoder = new TextDecoder();
