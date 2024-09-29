@@ -62,9 +62,19 @@ const checkFile = async (
   if (inject) {
     const sourceCode = await Deno.readFile(filename);
     console.log(`${filename} ${blue("missing copyright. injecting ... done")}`);
+    const decodedSource = decode(sourceCode);
+    const lines = decodedSource.split("\n");
+    if (decodedSource.startsWith("#!")) {
+      const shebang = lines.shift();
+      lines.unshift(copyrightLines.map(decode).join("\n"));
+      lines.unshift(shebang!);
+    } else {
+      lines.unshift(copyrightLines.map(decode).join("\n"));
+    }
+
     await Deno.writeFile(
       filename,
-      encode(copyrightLines.map(decode).join("\n") + "\n" + decode(sourceCode)),
+      encode(lines.join("\n")),
     );
     return true;
   } else {

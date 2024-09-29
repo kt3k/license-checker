@@ -132,6 +132,7 @@ Deno.test("inject", async () => {
     const liceses = confJson["**/*.ts"].join("\n");
     const t1 = readFileText("testdata/inject/1.ts.tmp");
     const t2 = readFileText("testdata/inject/2.ts.tmp");
+    const t3 = readFileText("testdata/inject/3.ts.tmp");
     const f1 = await Deno.open(
       "testdata/inject/1.ts",
       { write: true, truncate: true },
@@ -140,10 +141,16 @@ Deno.test("inject", async () => {
       "testdata/inject/2.ts",
       { write: true, truncate: true },
     );
+    const f3 = await Deno.open(
+      "testdata/inject/3.ts",
+      { write: true, truncate: true },
+    );
     await copy(new StringReader(t1), f1);
     await copy(new StringReader(t2), f2);
+    await copy(new StringReader(t3), f3);
     f1.close();
     f2.close();
+    f3.close();
     const data = normalize(
       await run(
         [...baseArgs, "--inject"],
@@ -156,12 +163,18 @@ Deno.test("inject", async () => {
 Using config file ".licenserc.json"
 1.ts ... ${green("ok")}
 2.ts ${blue("missing copyright. injecting ... done")}
+3.ts ${blue("missing copyright. injecting ... done")}
 `),
     );
     assertEquals(readFileText("testdata/inject/1.ts"), t1);
     assertEquals(
       readFileText("testdata/inject/2.ts"),
       `${liceses}\n${t2}`,
+    );
+    const shebangFile = readFileText("testdata/inject/3.ts");
+    assertEquals(
+      shebangFile,
+      `#! /usr/bin/env -S deno run\n${liceses}\n\nconsole.log("hello world");\n`,
     );
   } catch (e) {
     console.error(e);
