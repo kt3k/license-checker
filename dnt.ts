@@ -31,7 +31,7 @@ await build({
   package: {
     // package.json properties
     name: "@kt3k/license-checker",
-    version: "3.2.11",
+    version: "3.3.0",
     description: "📄 CLI tool for checking license headers in files",
     license: "MIT",
     repository: {
