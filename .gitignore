@@ -1,3 +1,4 @@
 .idea
 coverage
 deno.lock
+npm
