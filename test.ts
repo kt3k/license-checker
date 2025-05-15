@@ -173,7 +173,7 @@ Using config file ".licenserc.json"
     );
     const shebangFile = readFileText("testdata/inject/3.ts");
     assertEquals(
-      shebangFile.replace(/\\r\\n/g, "\n"),
+      shebangFile.replaceAll("\r\n", "\n"),
       `#! /usr/bin/env -S deno run\n${liceses}\n\nconsole.log("hello world");\n`,
     );
   } catch (e) {
