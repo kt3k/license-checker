@@ -3,7 +3,7 @@ commit: Bump to version v%.%.%
 files:
   README.md:
     - license-checker v%.%.%
-    - '@kt3k/license-checker@%.%.%'
+    - "@kt3k/license-checker@%.%.%"
   main.ts: console.log("%.%.%")
   dnt.ts: 'version: "%.%.%"'
   deno.json: '"version": "%.%.%"'
